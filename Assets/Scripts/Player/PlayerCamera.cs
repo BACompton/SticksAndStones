@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UI;
 
 namespace Player {
     public class PlayerCamera : MonoBehaviour {
@@ -7,6 +8,8 @@ namespace Player {
         public bool playerCamControl = true;
 
         private PlayerStat stat;
+        private UIManager manager;
+        private GameUI playerUI;
 
         void Start() {
             // Try to loacte the player
@@ -19,6 +22,9 @@ namespace Player {
                     player = GameObject.FindGameObjectWithTag("Player");
             }
 
+            manager = GetComponent<UIManager>();
+            playerUI = manager.GetUI(UI.Player.ID);
+
             // Load Player Stats
             if(player != null) {
                 player = GameObject.Find(player.name);
@@ -29,16 +35,8 @@ namespace Player {
 
         // Update is called once per frame
         void Update() {
-            
-            if(Input.GetKeyDown(KeyCode.F)) { // Temp force to unbind the cursor
-                Cursor.lockState = Cursor.lockState != CursorLockMode.Locked ? CursorLockMode.Locked : CursorLockMode.None;
-                playerCamControl = !playerCamControl;
-            }
-
-            // Lock Cursor to screen.
-            if(playerCamControl)
-                Cursor.lockState = CursorLockMode.Locked;
-            if(!playerCamControl || Cursor.lockState != CursorLockMode.Locked)
+            // Stops Input calculations according
+            if(!playerCamControl || Cursor.lockState != CursorLockMode.Locked || !playerUI.active)
                  return;
                 
             // Record Inputs
