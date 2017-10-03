@@ -17,6 +17,7 @@ namespace Player {
 
         void Update() {
             if (controller.isGrounded) {
+                // Scale users input to player movement
                 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection.Scale(stat.speed);
