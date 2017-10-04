@@ -5,11 +5,22 @@ using UnityEngine.UI;
 using Player;
 
 namespace UI {
+    /// <summary>
+    /// Pause UI Interaction script
+    /// </summary>
     public class Pause : GameUI {
-
+        /// <summary>
+        /// Pause UI ID used to identify a pause UI script.
+        /// </summary>
         public static string ID = "Pause";
 
+        /// <summary>
+        /// A reference to the parent where all the options are held.
+        /// </summary>
         private Transform options;
+        /// <summary>
+        /// The current index of the selected item.
+        /// </summary>
         private int index;
 
         // Use this for initialization
@@ -29,7 +40,7 @@ namespace UI {
 
         // Update is called once per frame
         void Update() {
-            if(!active)
+            if(!Active)
                 return;
 
             // Cursor Control

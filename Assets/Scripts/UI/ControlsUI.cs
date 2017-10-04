@@ -41,7 +41,7 @@ namespace UI {
                 return;
             }
 
-            if(!active || listen)
+            if(!Active || listen)
                 return;
 
             Cursor.lockState = CursorLockMode.None;
@@ -52,7 +52,7 @@ namespace UI {
         }
 
         void OnGUI() {
-            if(!active)
+            if(!Active)
                 return;
 
             // Listen for next Button press

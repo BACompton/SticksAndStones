@@ -4,13 +4,34 @@ using UI;
 namespace Player {
     public class PlayerCamera : MonoBehaviour {
 
+        /// <summary>
+        /// The gameobject the player controls
+        /// </summary>
         public GameObject player;
+        /// <summary>
+        /// Flags when the player should be able to control their camera.
+        /// </summary>
         public bool playerCamControl = true;
+        /// <summary>
+        /// Y rotation limits
+        /// </summary>
         public float yMin = -80.0f, yMax = 80.0f;
 
+        /// <summary>
+        /// Player sensitivity stats
+        /// </summary>
         private PlayerStat stat;
+        /// <summary>
+        /// The UI Manager for the scene
+        /// </summary>
         private UIManager manager;
+        /// <summary>
+        /// The player's UI during gameplay
+        /// </summary>
         private GameUI playerUI;
+        /// <summary>
+        /// The current yRot of the player's camera
+        /// </summary>
         private float yRot;
 
         void Start() {
@@ -39,7 +60,7 @@ namespace Player {
         // Update is called once per frame
         void Update() {
             // Stops Input calculations according
-            if(!playerCamControl || Cursor.lockState != CursorLockMode.Locked || !playerUI.active)
+            if(!playerCamControl || Cursor.lockState != CursorLockMode.Locked || !playerUI.Active)
                  return;
                 
             // Record Inputs

@@ -4,15 +4,36 @@ using UnityEngine;
 using UI;
 
 namespace Player {
+    /// <summary>
+    /// Translates players input into player character actions.
+    /// </summary>
     public class PlayerController : MonoBehaviour {
+        /// <summary>
+        /// The object that holds the UI manager script
+        /// </summary>
         public Camera managerObj;
 
+        /// <summary>
+        /// The UI manager pulled from managerObj
+        /// </summary>
         private UIManager manager;
+        /// <summary>
+        /// The player's UI during gameplay
+        /// </summary>
         private GameUI playerUI;
 
+        /// <summary>
+        /// Player controller used to handle player movement
+        /// </summary>
         private CharacterController controller;
+        /// <summary>
+        /// The current movement direction of the player
+        /// </summary>
         private Vector3 moveDirection;
 
+        /// <summary>
+        /// The movemnt setting for the player
+        /// </summary>
         private PlayerStat stat;
 
         private void Start() {
@@ -25,7 +46,7 @@ namespace Player {
         }
 
         void Update() {
-            if(!playerUI.active) {
+            if(!playerUI.Active) {
                 controller.Move(Vector3.zero);
                 return;
             }

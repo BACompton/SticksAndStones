@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace UI {
+    /// <summary>
+    /// Generic Game UI interaction script.
+    /// </summary>
     public class GameUI : MonoBehaviour {
-        public bool active {
+        /// <summary>
+        /// Flag to activate the interaction script
+        /// </summary>
+        public bool Active {
             get { return _active; }
             set {
                 _active = value;
                 Activate();
             }
         }
-        public bool render {
+        /// <summary>
+        /// Flag to render the UI
+        /// </summary>
+        public bool Render {
             get { return _render; }
             set {
                 _render = value;
@@ -19,9 +28,21 @@ namespace UI {
             }
         }
 
+        /// <summary>
+        /// The object that holds the UI manager script
+        /// </summary>
         public Camera managerObj;
+        /// <summary>
+        /// The id for the UI
+        /// </summary>
         protected string id;
+        /// <summary>
+        /// Flag to identify when the UI is transitioning
+        /// </summary>
         protected bool transition;
+        /// <summary>
+        /// The UI manager pulled from managerObj
+        /// </summary>
         protected UIManager manager;
 
         private bool _active, _render;

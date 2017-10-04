@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace UI {
+    /// <summary>
+    /// A manager to handle all UI transitions within the same scene.
+    /// </summary>
     public class UIManager : MonoBehaviour {
 
+        /// <summary>
+        /// A list of all UI's within the scene.
+        /// </summary>
         public List<Canvas> canvases = new List<Canvas>();
 
+        /// <summary>
+        /// A list of UI with an interaction script.
+        /// </summary>
         private List<GameUI> uis;
 
         // Use this for initialization
@@ -83,8 +92,8 @@ namespace UI {
         /// <param name="active">The active flag</param>
         /// <param name="render">The render flag</param>
         public static void ActivateRender(GameUI ui, bool active, bool render) {
-            ui.render = render;
-            ui.active = active;
+            ui.Render = render;
+            ui.Active = active;
         }
     }
 }
