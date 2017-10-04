@@ -11,6 +11,7 @@ namespace Player {
         private PlayerStat stat;
         private UIManager manager;
         private GameUI playerUI;
+        private float yRot;
 
         void Start() {
             // Try to loacte the player
@@ -25,6 +26,7 @@ namespace Player {
 
             manager = GetComponent<UIManager>();
             playerUI = manager.GetUI(UI.Player.ID);
+            yRot = 0.0f;
 
             // Load Player Stats
             if(player != null) {
@@ -47,12 +49,12 @@ namespace Player {
             if(stat != null)
                 mouseRot.Scale(stat.rotSensitivity);
 
-            Vector3 lookCam = new Vector3(mouseRot.y, 0);
+            yRot += mouseRot.y;
+            yRot = Mathf.Clamp(yRot, yMin, yMax);
             Vector3 lookPlayer = new Vector3(0, mouseRot.x);
-            
+
             // Apply Rotations
-            transform.Rotate(lookCam);
-            // Clamp the rotation
+            transform.rotation = Quaternion.Euler(yRot, transform.eulerAngles.y, transform.eulerAngles.z);
             if(player != null)
                 player.transform.Rotate(lookPlayer);
         }
