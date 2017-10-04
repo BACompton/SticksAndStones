@@ -57,6 +57,15 @@ namespace Player {
         /// Control to pause and unpause gameplay.
         /// </summary>
         public static KeyControl Pause = new KeyControl("", "Pause", KeyCode.Escape, true);
+        public static KeyControl Fire = new KeyControl("", "Fire", KeyCode.Mouse0, true);
+        public static KeyControl ItemWheel = new KeyControl("", "Item Wheel", KeyCode.Q, true);
+
         public static KeyControl Cancel = new KeyControl("Menu", "Cancel", KeyCode.Escape, true);
+        public static KeyControl Select = new KeyControl("Menu", "Select", KeyCode.Return, true);
+        public static KeyControl SelectionUp = new KeyControl("Menu", "Selection Up", KeyCode.UpArrow, true);
+        public static KeyControl SelectionDown = new KeyControl("Menu", "Selection Down", KeyCode.DownArrow, true);
+        public static KeyControl ItemSlot1 = new KeyControl("Menu", "Item Slot 1", KeyCode.Alpha1, true);
+        public static KeyControl ItemSlot2 = new KeyControl("Menu", "Item Slot 2", KeyCode.Alpha2, true);
+        public static KeyControl ItemSlot3 = new KeyControl("Menu", "Item Slot 3", KeyCode.Alpha3, true);
     }
 }

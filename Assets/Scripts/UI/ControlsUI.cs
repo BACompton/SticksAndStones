@@ -9,6 +9,7 @@ namespace UI {
         public static string ID = "Controls";
 
         public GameObject controls;
+        public Scrollbar bar;
 
         private const string SECT = "UI/KeySection", KEY = "UI/KeyControl";
 
@@ -45,6 +46,7 @@ namespace UI {
 
             Cursor.lockState = CursorLockMode.None;
 
+            // UI Transitions
             if(Input.GetKeyUp(Controls.Cancel.key))
                 Exit();
         }
@@ -172,6 +174,9 @@ namespace UI {
             }
         }
 
+        /// <summary>
+        /// Helper transition to Exit UI
+        /// </summary>
         private void Exit() {
             if(!listen) {
                 manager.Transition(this, Pause.ID, false);

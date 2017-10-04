@@ -27,13 +27,6 @@ namespace UI {
                 manager.Transition(this, Pause.ID, true);
         }
 
-        void OnGUI() {
-            if(!active || transition)
-                return;
-
-                           
-        }
-
         /// <summary>
         /// Sets the id for the UI canvas
         /// </summary>
