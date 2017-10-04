@@ -11,6 +11,8 @@ namespace UI {
 
         // Use this for initialization
         void Start() {
+            bool foundActive = false;
+            int active = 0;
             uis = new List<GameUI>();
 
             // Load Game UIs within the scene
@@ -20,15 +22,27 @@ namespace UI {
                 if(ui != null) {
                     ui.SetId();
                     uis.Add(ui);
+
+                    if(ui.gameObject.activeInHierarchy)
+                        foundActive = true;
+
+                    if(!foundActive)
+                        active++;
                 }
             }
 
             // Enable the first UI
             if(uis.Count > 0) {
-                ActivateRender(uis[0], true, true);
+                // Reset the active counter if no active screen was found.
+                if(active >= uis.Count)
+                    active = 0;
 
-                for(int i = 1; i < uis.Count; i++)
-                    ActivateRender(uis[i], false, false);
+                for(int i = 0; i < uis.Count; i++) {
+                    if(i == active)
+                        ActivateRender(uis[i], true, true);
+                    else
+                        ActivateRender(uis[i], false, false);
+                }
             }
         }
 
@@ -41,7 +55,10 @@ namespace UI {
         public void Transition(GameUI curr, string uiID, bool currRender) {
             foreach(GameUI ui in uis)
                 if(ui.IsID(uiID)) {
+                    curr.TransitionFrom();
                     ActivateRender(curr, false, currRender);
+
+                    ui.TransitionTo();
                     ActivateRender(ui, true, true);
                 }
         }

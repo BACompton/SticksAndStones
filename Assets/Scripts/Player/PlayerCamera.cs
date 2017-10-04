@@ -6,6 +6,7 @@ namespace Player {
 
         public GameObject player;
         public bool playerCamControl = true;
+        public float yMin = -80.0f, yMax = 80.0f;
 
         private PlayerStat stat;
         private UIManager manager;
@@ -51,6 +52,7 @@ namespace Player {
             
             // Apply Rotations
             transform.Rotate(lookCam);
+            // Clamp the rotation
             if(player != null)
                 player.transform.Rotate(lookPlayer);
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
 namespace UI {
     public class Player : GameUI {
@@ -22,8 +23,15 @@ namespace UI {
             Cursor.lockState = CursorLockMode.Locked;
 
             // UI Transitions
-            if(Input.GetKeyDown(KeyCode.V))
-                manager.Transition(this, Pause.ID, true);                
+            if(Input.GetKeyUp(Controls.Pause.key))
+                manager.Transition(this, Pause.ID, true);
+        }
+
+        void OnGUI() {
+            if(!active || transition)
+                return;
+
+                           
         }
 
         /// <summary>

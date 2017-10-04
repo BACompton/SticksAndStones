@@ -21,6 +21,7 @@ namespace UI {
 
         public Camera managerObj;
         protected string id;
+        protected bool transition;
         protected UIManager manager;
 
         private bool _active, _render;
@@ -39,8 +40,12 @@ namespace UI {
         /// Helper method to activate the ui canvas when necessary.
         /// </summary>
         public void Activate() {
-            gameObject.SetActive(_active || _render); 
+            gameObject.SetActive(_active || _render);
+            transition = _active;
         }
+
+        public virtual void TransitionTo() { }
+        public virtual void TransitionFrom() { }
 
         /// <summary>
         /// Checks to see if ui is of the same type.
