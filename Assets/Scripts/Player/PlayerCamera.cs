@@ -2,6 +2,9 @@
 using UI;
 
 namespace Player {
+    /// <summary>
+    /// Translates players input into player rotation and camera rotation.
+    /// </summary>
     public class PlayerCamera : MonoBehaviour {
 
         /// <summary>

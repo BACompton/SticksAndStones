@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace Player {
     /// <summary>
     /// Player Control Specification. Details the keyCode plus extra details about its game use.
     /// </summary>
-    public class KeyControl {
+    public class KeyControl : IEquatable<KeyControl>, IComparable<KeyControl> {
         /// <summary>
         /// Details the category of the player control.
         /// </summary>
@@ -47,13 +48,31 @@ namespace Player {
         /// </summary>
         public KeyCode key;
         
-
+        /// <summary>
+        /// Internal section
+        /// </summary>
         private string _sect;
+        /// <summary>
+        /// Internal default key
+        /// </summary>
         private KeyCode _def;
+        /// <summary>
+        /// Internal flag to identify inputs added to Controls.contolSects
+        /// </summary>
         private bool _added;
 
-        public KeyControl(string sect, string name, KeyCode key) : this(sect, name, key, false) {}
+        /// <summary>
+        /// </summary>
+        /// <param name="name">The named use for the control</param>
+        /// <param name="key">The KeyCode to listen for</param>
+        public KeyControl(string name, KeyCode key) : this("", name, key, false) {}
 
+        /// <summary>
+        /// </summary>
+        /// <param name="sect">The section to add the control </param>
+        /// <param name="name">The named use for the control</param>
+        /// <param name="key">The Keycode to listen for</param>
+        /// <param name="add">Flag to at it to Controls.contolSects</param>
         public KeyControl(string sect, string name, KeyCode key, bool add) {
             _added = add;
             Section = sect;
@@ -62,10 +81,36 @@ namespace Player {
             _def = key;
         }
 
+        /// <summary>
+        /// Determines if the current KeyCode is the default KeyCode
+        /// </summary>
+        /// <returns>True if the current KeyCode is the same as the default KeyCode; Othwewise false.</returns>
         public bool IsDefault() { return _def == key; }
+
+        public bool Equals(KeyControl other) {
+            if(other == null) return false;
+
+            if(!name.Equals(other.name)) return false;
+            if(!key.Equals(other.key)) return false;
+            if(!_sect.Equals(other._sect)) return false;
+            if(!_def.Equals(other._def)) return false;
+            if(!_added.Equals(other._added)) return false;
+
+            return true;
+        }
+
+        public int CompareTo(KeyControl other) {
+            if(other == null)
+                return 1;
+            
+            return name.CompareTo(other.name);
+        }
     }
 
     public class Controls {
+        /// <summary>
+        /// A container for registed controls sperated by sections.
+        /// </summary>
         public static Dictionary<string, List<KeyControl>> controlSects = new Dictionary<string, List<KeyControl>>();
         
         /// <summary>

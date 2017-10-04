@@ -118,6 +118,7 @@ namespace UI {
                 else
                     sectLabel.SetActive(false);
 
+                Controls.controlSects[sect].Sort();
                 foreach(KeyControl k in Controls.controlSects[sect]) {
                     GameObject kObj = Instantiate(keyPre),
                         kLabel = kObj.transform.Find("Label").gameObject,
