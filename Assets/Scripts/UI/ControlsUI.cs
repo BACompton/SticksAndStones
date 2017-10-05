@@ -5,17 +5,37 @@ using UnityEngine.UI;
 using Player;
 
 namespace UI {
+    /// <summary>
+    /// Controls UI Interaction script
+    /// </summary>
     public class ControlsUI : GameUI {
+        /// <summary>
+        /// Player UI ID used to identify a player UI script.
+        /// </summary>
         public static string ID = "Controls";
 
+        /// <summary>
+        /// Place where all the controls should be loaded
+        /// </summary>
         public GameObject controls;
-        public Scrollbar bar;
 
+        /// <summary>
+        /// Paths to control UI resources.
+        /// </summary>
         private const string SECT = "UI/KeySection", KEY = "UI/KeyControl";
 
+        /// <summary>
+        /// Flags to toggle the rebinding listening.
+        /// </summary>
         private bool listen, listenFilp;
+        /// <summary>
+        /// Buttons currently being rebound
+        /// </summary>
         private GameObject src, reset;
-        private KeyControl key, rec;
+        /// <summary>
+        /// The key pressed during rebinding listening phase
+        /// </summary>
+        private KeyControl key;
 
         // Use this for initialization
         new void Start() {
