@@ -3,26 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Entity{
-    /// <summary>
-    /// Holder stats for an entity
-    /// </summary>
+    /// <summary> Holder stats for an entity </summary>
     public class EntityStat : MonoBehaviour {
-        /// <summary>
-        /// The movement speed of an entity
-        /// </summary>
+        /// <summary> The movement speed of an entity </summary>
         public Vector3 speed = new Vector3(6.0F, 0.0f, 6.0f);
-        /// <summary>
-        /// Flag to apply seprate gravity from the project's gravity.
-        /// </summary>
+        /// <summary> Flag to apply seprate gravity from the project's gravity. </summary>
         public bool ownGravity = false;
-        /// <summary>
-        /// The entity specifc gravity to apply given when ownGravity is flagged.
-        /// </summary>
+        /// <summary> The entity specifc gravity to apply given when ownGravity is flagged. </summary>
         public Vector3 gravity = Physics.gravity;
 
-        /// <summary>
-        /// Applys an objects gravity to an objects movement.
-        /// </summary>
+        /// <summary> Applys an objects gravity to an objects movement. </summary>
         /// <param name="move">The movement vector</param>
         /// <returns> The movement after gravity</returns>
         public Vector3 applyGravity(Vector3 move) {

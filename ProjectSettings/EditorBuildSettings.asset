@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/test.unity
     guid: 462a0b02472aaac4cb5f683eccfd8193
+  - enabled: 1
+    path: Assets/Scenes/BallThrowTestScene.unity
+    guid: 6f42e32de27580847a8453076fac7f2c

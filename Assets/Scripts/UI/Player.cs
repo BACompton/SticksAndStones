@@ -4,13 +4,9 @@ using UnityEngine;
 using Player;
 
 namespace UI {
-    /// <summary>
-    /// Player UI Interaction script
-    /// </summary>
+    /// <summary> Player UI Interaction script </summary>
     public class Player : GameUI {
-        /// <summary>
-        /// Player UI ID used to identify a player UI script.
-        /// </summary>
+        /// <summary> Player UI ID used to identify a player UI script. </summary>
         public static string ID = "Player";
 
         // Use this for initialization
@@ -32,9 +28,7 @@ namespace UI {
                 Manager.Transition(this, Pause.ID, true);
         }
 
-        /// <summary>
-        /// Sets the id for the UI canvas
-        /// </summary>
+        /// <summary> Sets the id for the UI canvas </summary>
         public override void SetId() { id = ID; }
     }
 }

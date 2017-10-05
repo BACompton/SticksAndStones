@@ -5,22 +5,14 @@ using UnityEngine.UI;
 using Player;
 
 namespace UI {
-    /// <summary>
-    /// Pause UI Interaction script
-    /// </summary>
+    /// <summary> Pause UI Interaction script </summary>
     public class Pause : GameUI {
-        /// <summary>
-        /// Pause UI ID used to identify a pause UI script.
-        /// </summary>
+        /// <summary> Pause UI ID used to identify a pause UI script. </summary>
         public static string ID = "Pause";
 
-        /// <summary>
-        /// A reference to the parent where all the options are held.
-        /// </summary>
+        /// <summary> A reference to the parent where all the options are held. </summary>
         private Transform options;
-        /// <summary>
-        /// The current index of the selected item.
-        /// </summary>
+        /// <summary> The current index of the selected item. </summary>
         private int index;
 
         // Use this for initialization
@@ -66,36 +58,26 @@ namespace UI {
                 options.GetChild(index).gameObject.GetComponent<Button>().onClick.Invoke();
         }
 
-        /// <summary>
-        /// Sets the id for the UI canvas
-        /// </summary>
+        /// <summary> Sets the id for the UI canvas </summary>
         public override void SetId() { id = ID; }
 
-        /// <summary>
-        /// Helper method to transition to the Controls UI
-        /// </summary>
+        /// <summary> Helper method to transition to the Controls UI </summary>
         private void ToControls() {
             Manager.Transition(this, ControlsUI.ID, false);
         }
 
-        /// <summary>
-        /// Helper method to transition to any necessary Quit UI
-        /// </summary>
+        /// <summary> Helper method to transition to any necessary Quit UI </summary>
         private void ToQuit() {
             Application.Quit();
         }
 
-        /// <summary>
-        /// Identifies the selected menu item.
-        /// </summary>
+        /// <summary> Identifies the selected menu item. </summary>
         private void SelectItem() {
             GameObject option = options.GetChild(index).gameObject;
             option.GetComponentInChildren<Text>().fontStyle = FontStyle.Bold;
         }
 
-        /// <summary>
-        /// Deselects a selected menu item.
-        /// </summary>
+        /// <summary> Deselects a selected menu item. </summary>
         private void DeselectItem() {
             GameObject option = options.GetChild(index).gameObject;
             option.GetComponentInChildren<Text>().fontStyle = FontStyle.Normal;

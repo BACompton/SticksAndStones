@@ -730,7 +730,7 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 542191777}
   m_Script: {fileID: 11500000, guid: 440447ec314b93449811f64f3842654e, type: 3}
---- !u!1001 &1487580276
+--- !u!1001 &1426098201
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -774,26 +774,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114367465630328934, guid: 0da06df44018d024bba42906c4ff8066,
-        type: 2}
-      propertyPath: playerUI
-      value: 
-      objectReference: {fileID: 690535184}
-    - target: {fileID: 114730847653793688, guid: 0da06df44018d024bba42906c4ff8066,
-        type: 2}
-      propertyPath: playerUI
-      value: 
-      objectReference: {fileID: 690535184}
-    - target: {fileID: 114730847653793688, guid: 0da06df44018d024bba42906c4ff8066,
-        type: 2}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1335607570316618, guid: 0da06df44018d024bba42906c4ff8066,
-        type: 2}
-    - target: {fileID: 1335607570316618, guid: 0da06df44018d024bba42906c4ff8066, type: 2}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 114870527396375342, guid: 0da06df44018d024bba42906c4ff8066,
         type: 2}
       propertyPath: uis.Array.data[0]
@@ -809,6 +789,26 @@ Prefab:
       propertyPath: uis.Array.data[2]
       value: 
       objectReference: {fileID: 86313272}
+    - target: {fileID: 114367465630328934, guid: 0da06df44018d024bba42906c4ff8066,
+        type: 2}
+      propertyPath: playerUI
+      value: 
+      objectReference: {fileID: 690535184}
+    - target: {fileID: 114730847653793688, guid: 0da06df44018d024bba42906c4ff8066,
+        type: 2}
+      propertyPath: playerUI
+      value: 
+      objectReference: {fileID: 690535184}
+    - target: {fileID: 136064769257000580, guid: 0da06df44018d024bba42906c4ff8066,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114160994381246714, guid: 0da06df44018d024bba42906c4ff8066,
+        type: 2}
+      propertyPath: ui
+      value: 
+      objectReference: {fileID: 690535184}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0da06df44018d024bba42906c4ff8066, type: 2}
   m_IsPrefabParent: 0
@@ -818,3 +818,65 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 409901399}
   m_Script: {fileID: 11500000, guid: 83755bfc73d32574497fd2ccf33253b0, type: 3}
+--- !u!1 &1741120627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1741120630}
+  - component: {fileID: 1741120629}
+  - component: {fileID: 1741120628}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1741120628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741120627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &1741120629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741120627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -619905303, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 5
+--- !u!4 &1741120630
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1741120627}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

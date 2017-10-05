@@ -5,36 +5,24 @@ using UnityEngine.UI;
 using Player;
 
 namespace UI {
-    /// <summary>
-    /// Controls UI Interaction script
-    /// </summary>
+    /// <summary> Controls UI Interaction script </summary>
     public class ControlsUI : GameUI {
-        /// <summary>
-        /// Player UI ID used to identify a player UI script.
-        /// </summary>
+        /// <summary> Player UI ID used to identify a player UI script. </summary>
         public static string ID = "Controls";
 
-        /// <summary>
-        /// Place where all the controls should be loaded
-        /// </summary>
+        /// <summary> Place where all the controls should be loaded </summary>
         public GameObject controls;
 
-        /// <summary>
-        /// Paths to control UI resources.
-        /// </summary>
+        /// <summary> Paths to control UI resources. </summary>
         private const string SECT = "UI/KeySection", KEY = "UI/KeyControl";
+        /// <summary> Formats for GameObject names </summary>
+        private const string SECT_NAME = "Section {0}", KEY_NAME = "KeyControl {0}";
 
-        /// <summary>
-        /// Flags to toggle the rebinding listening.
-        /// </summary>
+        /// <summary> Flags to toggle the rebinding listening. </summary>
         private bool listen, listenFilp;
-        /// <summary>
-        /// Buttons currently being rebound
-        /// </summary>
+        /// <summary> Buttons currently being rebound </summary>
         private GameObject src, reset;
-        /// <summary>
-        /// The key pressed during rebinding listening phase
-        /// </summary>
+        /// <summary> The key pressed during rebinding listening phase </summary>
         private KeyControl key;
 
         // Use this for initialization
@@ -102,10 +90,10 @@ namespace UI {
                         k = key.key;
                     else {
                         key.key = k;
-                        reset.GetComponent<Button>().interactable = !key.IsDefault();
+                        UnBind(key);
                     }
 
-                    src.GetComponentInChildren<Text>().text = k.ToString();
+                    UpdateKeyBtns(key, src, reset, k.ToString());
                     return;
                 }
             }
@@ -118,9 +106,7 @@ namespace UI {
             key = null;
         }
 
-        /// <summary>
-        /// Reloads the Control UI menu.
-        /// </summary>
+        /// <summary> Reloads the Control UI menu. </summary>
         public void LoadControls() {
             GameObject sectPre = (GameObject)Resources.Load(SECT), keyPre = (GameObject)Resources.Load(KEY);
 
@@ -130,7 +116,7 @@ namespace UI {
                     sectLabel = sectObj.transform.Find("Label").gameObject;
 
                 // SetUp control section in UI
-                sectObj.transform.name = string.Format(format:"Section {0}", arg0: sect);
+                sectObj.transform.name = string.Format(format: SECT_NAME, arg0: sect);
                 sectObj.transform.SetParent(controls.transform);
 
                 if(sect != "")
@@ -142,38 +128,32 @@ namespace UI {
                 foreach(KeyControl k in Controls.controlSects[sect]) {
                     GameObject kObj = Instantiate(keyPre),
                         kLabel = kObj.transform.Find("Label").gameObject,
-                        kKey = kObj.transform.Find("Btns").Find("Key").gameObject,
-                        kReset = kObj.transform.Find("Btns").Find("Reset").gameObject;
+                        kKey = FindKeyButton(kObj.transform),
+                        kReset = FindResetButton(kObj.transform);
 
                     // Set the text for a KeyControl UI segment
-                    kObj.transform.name = string.Format(format: "KeyControl {0}", arg0: k.name);
+                    kObj.transform.name = string.Format(format: KEY_NAME, arg0: k.name);
                     kObj.transform.SetParent(sectObj.transform);
                     kLabel.GetComponent<Text>().text = k.name;
-                    kKey.GetComponentInChildren<Text>().text = k.key.ToString();
+                    UpdateKeyBtns(k, kKey, kReset, k.key.ToString());
 
                     // Add button listeners
                     kKey.GetComponent<Button>().onClick.AddListener(delegate { KeyListen(kKey, kReset, k); });
                     kReset.GetComponent<Button>().onClick.AddListener(delegate { Reset(kKey, kReset, k); });
-
-                    kReset.GetComponent<Button>().interactable = !k.IsDefault();
                 }
             }
         }
 
-        /// <summary>
-        /// Sets the id for the UI canvas
-        /// </summary>
+        /// <summary> Sets the id for the UI canvas </summary>
         public override void SetId() { id = ID; }
 
-        /// <summary>
-        /// Helper to toggle the listening functionality of the UI on
-        /// </summary>
+        /// <summary> Helper to toggle the listening functionality of the UI on </summary>
         /// <param name="src">The input button pressed</param>
         /// <param name="reset">The reset button for the input</param>
         /// <param name="key">The input being changed</param>
         private void KeyListen(GameObject src, GameObject reset, KeyControl key) {
             if(!listen) {
-                src.GetComponentInChildren<Text>().text = "...";
+                UpdateKeyBtns(key, src, reset, "...");
                 listen = true;
                 this.src = src;
                 this.reset = reset;
@@ -181,23 +161,58 @@ namespace UI {
             }
         }
 
-        /// <summary>
-        /// Helper to reset an input
-        /// </summary>
+        /// <summary> Helper to reset an input </summary>
         /// <param name="src">The input button to reset</param>
         /// <param name="reset">The reset button for the input</param>
         /// <param name="key">The input being reset</param>
         private void Reset(GameObject src, GameObject reset, KeyControl key) {
             if(!listen) {
                 key.key = key.Def;
-                src.GetComponentInChildren<Text>().text = key.key.ToString();
-                reset.GetComponent<Button>().interactable = !key.IsDefault();
+                UnBind(key);
+                UpdateKeyBtns(key, src, reset, key.key.ToString());
             }
         }
 
-        /// <summary>
-        /// Helper transition to Exit UI
-        /// </summary>
+        /// <summary> Updates the button for the specified KeyControl </summary>
+        /// <param name="src">The key button</param>
+        /// <param name="reset">The reset button</param>
+        /// <param name="display">The display for the key button</param>
+        private void UpdateKeyBtns(KeyControl key, GameObject src, GameObject reset, string display) {
+            src.GetComponentInChildren<Text>().text = display;
+            reset.GetComponent<Button>().interactable = !key.IsDefault();
+        }
+
+        /// <summary> Helper method to unbind any conflicting key binding. </summary>
+        /// <param name="key"></param>
+        private void UnBind(KeyControl key) {
+            GameObject sect = GameObject.Find(string.Format(SECT_NAME, key.Section));
+
+            foreach(KeyControl k in Controls.controlSects[key.Section])
+                if(k != key && k.key == key.key) {
+                    Transform keySect = sect.transform.Find(string.Format(KEY_NAME, k.name));
+                    GameObject keyGO = FindKeyButton(keySect),
+                        resetGO = FindResetButton(keySect);
+
+                    k.key = KeyCode.None;
+                    UpdateKeyBtns(k, keyGO, resetGO, k.key.ToString());
+                }
+        }
+
+        /// <summary> Locates the key button in a KeyContorl prefab group. </summary>
+        /// <param name="keySect">The KeyControl to search</param>
+        /// <returns>The key button's game object</returns>
+        private GameObject FindKeyButton(Transform keySect) {
+            return keySect.Find("Btns").Find("Key").gameObject;
+        }
+
+        /// <summary> Locates the reset button in a KeyContorl prefab group. </summary>
+        /// <param name="keySect">The KeyControl to search</param>
+        /// <returns>The reset button's game object</returns>
+        private GameObject FindResetButton(Transform keySect) {
+            return keySect.Find("Btns").Find("Reset").gameObject;
+        }
+
+        /// <summary> Helper transition to Exit UI </summary>
         private void Exit() {
             if(!listen) {
                 Manager.Transition(this, Pause.ID, false);

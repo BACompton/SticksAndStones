@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace UI {
-    /// <summary>
-    /// A manager to handle all UI transitions within the same scene.
-    /// </summary>
+    /// <summary> A manager to handle all UI transitions within the same scene. </summary>
     public class UIManager : MonoBehaviour {
 
-        /// <summary>
-        /// A list of all UI's within the scene.
-        /// </summary>
+        /// <summary> A list of all UI's within the scene. </summary>
         public List<GameUI> uis = new List<GameUI>();
 
         // Use this for initialization
@@ -47,9 +43,7 @@ namespace UI {
             }
         }
 
-        /// <summary>
-        /// Transitions UI screens
-        /// </summary>
+        /// <summary> Transitions UI screens </summary>
         /// <param name="curr">The current ui screen</param>
         /// <param name="uiID">The id of the ui screen to transition</param>
         /// <param name="currRender">Flag to continue to render the previous ui</param>
@@ -77,9 +71,7 @@ namespace UI {
             return null;
         }
 
-        /// <summary>
-        /// Simple helper method to set both the active and render flag for a UI.
-        /// </summary>
+        /// <summary> Simple helper method to set both the active and render flag for a UI. </summary>
         /// <param name="ui">The UI to set the flags</param>
         /// <param name="active">The active flag</param>
         /// <param name="render">The render flag</param>
