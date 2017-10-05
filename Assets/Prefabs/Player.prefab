@@ -66,9 +66,9 @@ GameObject:
   - component: {fileID: 33739203467273566}
   - component: {fileID: 135867219604508364}
   - component: {fileID: 23230761969880240}
+  - component: {fileID: 114046077906551514}
   - component: {fileID: 114160994381246714}
   - component: {fileID: 54619482575173306}
-  - component: {fileID: 114046077906551514}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -315,6 +315,7 @@ MonoBehaviour:
   available: 1
   disabled: 0
   respawnDelay: 4
+  alive: 0
   pickupDelay: 0.5
   throwForce: {x: 0, y: 250, z: 500}
   projAlpha: 0.5
@@ -334,6 +335,7 @@ MonoBehaviour:
   playerUI: {fileID: 0}
   inventory:
   - {fileID: 114160994381246714}
+  itemIndex: 0
 --- !u!114 &114531153569573616
 MonoBehaviour:
   m_ObjectHideFlags: 1

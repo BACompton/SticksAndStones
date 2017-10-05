@@ -6,13 +6,10 @@ using Entity;
 
 namespace Player {
     public class Ball : Item {
-
-        /// <summary> The amount of time before recalling back to the player </summary>
-        public float respawnDelay = 15.0f;
         /// <summary> The amount of thime before the player can pick up the item again. </summary>
         public float pickupDelay = 0.5f;
         /// <summary> The force the player throws the ball </summary>
-        public Vector3 throwForce = new Vector3(0, 100, 100);
+        public Vector3 throwForce = new Vector3(0, 250, 500);
         public float projAlpha = 0.5f;
         /// <summary> The object throwing the ball </summary>
         public GameObject baseObj;
@@ -27,8 +24,6 @@ namespace Player {
         private Ball source;
         /// <summary> A reference to the 'Ghost' ball </summary>
         private Ball proj;
-        /// <summary> The amount of time the ball have been alive </summary>
-        private float alive;
         /// <summary> Flags when the ball should be paused </summary>
         private bool paused;
         /// <summary> Saves ball body motion when paused </summary>
@@ -64,14 +59,15 @@ namespace Player {
         // Use this for initialization
         void Start() {
             rigid = GetComponent<Rigidbody>();
-            alive = 0.0f;
             saveVel = Vector3.zero;
             saveAngVel = Vector3.zero;
             stat = GetComponent<EntityStat>();
 
             if (source != null) {
+                source.alive = 0.0f;
                 rigid.AddForce(transform.TransformDirection(throwForce));
-            }
+            } else
+                alive = respawnDelay;
         }
 
         // Update is called once per frame
@@ -81,9 +77,9 @@ namespace Player {
 
             // Respawn timer for spawned balls.
             if (source != null) {
-                alive += Time.deltaTime;
+                source.alive += Time.deltaTime;
 
-                if (alive >= respawnDelay)
+                if (source.alive >= respawnDelay)
                     Destroy(this.gameObject);
             }
         }
@@ -93,13 +89,15 @@ namespace Player {
                 save = !paused ? p : false,
                 applySave = paused ? !p : false;
             paused = p;
-
+            
+            // Save ball's movement
             if (save) {
                 saveVel = rigid.velocity;
                 saveAngVel = rigid.angularVelocity;
                 rigid.isKinematic = true;
             }
 
+            // Load ball's movement
             if (applySave) {
                 rigid.isKinematic = false;
                 rigid.AddForce(saveVel, ForceMode.VelocityChange);
@@ -107,6 +105,7 @@ namespace Player {
                 
             }
 
+            // Apply own Movement
             if (stat != null && stat.ownGravity) {
                 rigid.useGravity = false;
                 rigid.AddForce(rigid.mass * stat.gravity);
@@ -114,12 +113,13 @@ namespace Player {
         }
 
         void OnTriggerEnter(Collider coll) {
-            if (pickupDelay <= alive && coll.gameObject.tag == "Player")
+            if (pickupDelay <= source.alive && coll.gameObject.tag == "Player")
                 Destroy(this.gameObject);
         }
 
         void OnDestroy() {
             if (source != null) {
+                source.alive = source.respawnDelay;
                 if (source.proj != null)
                     source.proj = null;
                 else 
@@ -131,6 +131,8 @@ namespace Player {
         /// Helper Method to spawn a Ball in the scene.
         /// </summary>
         private Ball CreateBall(string name) {
+            alive = 0.0f;
+
             Ball b = Instantiate(this, transform.position, baseObj.transform.rotation);
             b.gameObject.SetActive(true);
             b.source = this;

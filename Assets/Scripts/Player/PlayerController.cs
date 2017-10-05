@@ -12,22 +12,24 @@ namespace Player {
         public GameUI playerUI;
         /// <summary> The player's inventory </summary>
         public List<Item> inventory;
+        /// <summary> Identifies currently held item. </summary>
+        public int itemIndex = 0;
 
         /// <summary> Player controller used to handle player movement </summary>
         private CharacterController controller;
         /// <summary> The current movement direction of the player </summary>
         private Vector3 moveDirection;
-
         /// <summary> The movemnt setting for the player </summary>
         private PlayerStat stat;
-        /// <summary> Identifies currently held item. </summary>
-        private int itemIndex;
 
         private void Start() {
             controller = GetComponent<CharacterController>();
             stat = GetComponent<PlayerStat>();
             moveDirection = Vector3.zero;
+
             itemIndex = 0;
+            foreach (Item i in inventory)
+                i.alive = i.respawnDelay;
         }
 
         void Update() {
@@ -37,12 +39,11 @@ namespace Player {
             }
 
             CaptureMove();
-            
+
 
             // Handle Item Actions
+            CaptureItemSwitch();
             if (itemIndex >= 0 && itemIndex < inventory.Count) {
-                CaptureItemSwitch();
-
                 CapturFire();
                 CaptureAim();
             }
