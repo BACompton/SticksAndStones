@@ -91,8 +91,6 @@ namespace Player {
         /// <summary> A container for registed controls sperated by sections. </summary>
         public static Dictionary<string, List<KeyControl>> controlSects = new Dictionary<string, List<KeyControl>>();
 
-        /// <summary>/ Pauses and unpauses gameplay. </summary>
-        public static KeyControl Pause = new KeyControl("", "Pause", KeyCode.Escape, true);
         /// <summary> Fires projectiles/ </summary>
         public static KeyControl Fire = new KeyControl("", "Fire", KeyCode.Mouse0, true);
         /// <summary> Aims projectiles </summary>
@@ -101,7 +99,7 @@ namespace Player {
         public static KeyControl ItemWheel = new KeyControl("", "Item Wheel", KeyCode.Q, true);
 
         /// <summary>/ Cancels a action or return to previous menu </summary>
-        public static KeyControl Cancel = new KeyControl("Menu", "Cancel", KeyCode.Escape, true);
+        public static KeyControl Back = new KeyControl("Menu", "Back/Pause", KeyCode.Escape, true);
         /// <summary> Selects the selected menu item </summary>
         public static KeyControl Select = new KeyControl("Menu", "Select", KeyCode.Return, true);
         /// <summary> Moves selection up one item </summary>

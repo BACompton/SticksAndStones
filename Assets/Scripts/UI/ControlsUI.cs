@@ -55,7 +55,7 @@ namespace UI {
             Cursor.lockState = CursorLockMode.None;
 
             // UI Transitions
-            if(Input.GetKeyUp(Controls.Cancel.key))
+            if(Input.GetKeyUp(Controls.Back.key))
                 Exit();
         }
 
@@ -86,7 +86,7 @@ namespace UI {
                 if(k != KeyCode.None) {
                     listenFilp = true;
 
-                    if(k == Controls.Cancel.key)
+                    if(k == Controls.Back.key)
                         k = key.key;
                     else {
                         key.key = k;

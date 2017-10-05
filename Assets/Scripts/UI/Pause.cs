@@ -39,7 +39,7 @@ namespace UI {
             Cursor.lockState = CursorLockMode.None;
 
             // UI Transitions
-            if(Input.GetKeyUp(Controls.Pause.key))
+            if(Input.GetKeyUp(Controls.Back.key))
                 Manager.Transition(this, Player.ID, false);
 
             if(Input.GetKeyUp(Controls.SelectionUp.key)) {

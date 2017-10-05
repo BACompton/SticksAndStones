@@ -10,7 +10,10 @@ namespace Player {
         public float pickupDelay = 0.5f;
         /// <summary> The force the player throws the ball </summary>
         public Vector3 throwForce = new Vector3(0, 250, 500);
+        /// <summary> The alpha value of the projection </summary>
         public float projAlpha = 0.5f;
+        /// <summary> The characteric of the ball's bounce. </summary>
+        public float bounciness = 0.0f;
         /// <summary> The object throwing the ball </summary>
         public GameObject baseObj;
         /// <summary> The player's UI during gameplay </summary>
@@ -35,7 +38,7 @@ namespace Player {
 
         public override void Aim(InputType type) {
             if (type == InputType.HOLD && available && proj == null) {
-                proj = CreateBall("Ball Projection");
+                proj = CreateBall(string.Format("{0} Projection", gameObject.name));
 
                 Color c = proj.GetComponent<Renderer>().material.color;
                 c.a = projAlpha;
@@ -51,7 +54,7 @@ namespace Player {
                 if (proj != null)
                     Destroy(proj.gameObject);
 
-                Ball b = CreateBall("Ball");
+                Ball b = CreateBall(gameObject.name);
                 available = false;
             }
         }
@@ -62,6 +65,9 @@ namespace Player {
             saveVel = Vector3.zero;
             saveAngVel = Vector3.zero;
             stat = GetComponent<EntityStat>();
+
+            if(GetComponent<Collider>() != null)
+                GetComponent<Collider>().material.bounciness = bounciness;
 
             if (source != null) {
                 source.alive = 0.0f;
@@ -106,7 +112,8 @@ namespace Player {
             }
 
             // Apply own Movement
-            if (stat != null && stat.ownGravity) {
+            rigid.useGravity = stat == null || !stat.ownGravity;
+            if (!rigid.useGravity) {
                 rigid.useGravity = false;
                 rigid.AddForce(rigid.mass * stat.gravity);
             }

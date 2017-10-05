@@ -20,7 +20,6 @@ namespace UI {
         /// <summary> Details the current item being show on the UI </summary>
         private int activeIndex;
         
-
         // Use this for initialization
         new void Start() {
             base.Start();
@@ -46,17 +45,18 @@ namespace UI {
             Cursor.lockState = CursorLockMode.Locked;
 
             // UI Transitions
-            if (Input.GetKeyUp(Controls.Pause.key))
+            if (Input.GetKeyUp(Controls.Back.key))
                 Manager.Transition(this, Pause.ID, true);
 
             // Show current item
             if (player != null && itemContainer != null) {
                 if (activeIndex != player.itemIndex) {
                     HideItem(activeIndex);
-                    activeIndex = player.itemIndex;
 
-                    if (activeIndex < itemContainer.childCount)
+                    if (player.itemIndex < itemContainer.childCount) {
+                        activeIndex = player.itemIndex;
                         ShowItem(activeIndex);
+                    }
                 }
 
                 Item curr = player.inventory[activeIndex];

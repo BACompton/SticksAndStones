@@ -15,7 +15,6 @@ namespace Player {
         /// <summary> The amount of time the ball have been alive </summary>
         public float alive = 0.0f;
 
-
         /// <summary> Method used when the player presses the fire key </summary>
         public virtual void Fire(InputType type) { }
 

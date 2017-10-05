@@ -40,8 +40,6 @@ namespace Player {
 
             CaptureMove();
 
-
-            // Handle Item Actions
             CaptureItemSwitch();
             if (itemIndex >= 0 && itemIndex < inventory.Count) {
                 CapturFire();
