@@ -114,5 +114,19 @@ namespace Player {
         public static KeyControl ItemSlot2 = new KeyControl("Menu", "Item Slot 2", KeyCode.Alpha2, true);
         /// <summary>/ Selects item in slot 3 </summary>
         public static KeyControl ItemSlot3 = new KeyControl("Menu", "Item Slot 3", KeyCode.Alpha3, true);
+
+        /// <summary> Searches the registered controls for controls that contain the provided name. </summary>
+        /// <param name="name">The name to search</param>
+        /// <returns>A list of controls that contain the provided name</returns>
+        public static KeyControl[] FindMatching(string name) {
+            List<KeyControl> rtn = new List<KeyControl>();
+
+            foreach (string sect in controlSects.Keys)
+                foreach (KeyControl key in controlSects[sect])
+                    if (key.name.Contains(name))
+                        rtn.Add(key);
+            rtn.Sort();
+            return rtn.ToArray();
+        }
     }
 }

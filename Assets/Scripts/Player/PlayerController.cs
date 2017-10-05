@@ -6,6 +6,8 @@ using UI;
 namespace Player {
     /// <summary> Translates players input into player character actions. </summary>
     public class PlayerController : MonoBehaviour {
+        public static KeyControl[] itemSlots = Controls.FindMatching("Item Slot");
+        
         /// <summary> The player's UI during gameplay </summary>
         public GameUI playerUI;
         /// <summary> The player's inventory </summary>
@@ -34,7 +36,20 @@ namespace Player {
                 return;
             }
 
-            // Handle Movement
+            CaptureMove();
+            
+
+            // Handle Item Actions
+            if (itemIndex >= 0 && itemIndex < inventory.Count) {
+                CaptureItemSwitch();
+
+                CapturFire();
+                CaptureAim();
+            }
+        }
+
+        /// <summary> Handle Player Movement </summary>
+        private void CaptureMove() {
             if (controller.isGrounded) {
                 // Scale users input to player movement
                 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -47,24 +62,34 @@ namespace Player {
 
             moveDirection = stat.applyGravity(moveDirection);
             controller.Move(moveDirection * Time.deltaTime);
+        }
 
-            // Handle Item Actions
-            if (itemIndex >= 0 && itemIndex < inventory.Count) {
-                if (Input.GetKeyUp(Controls.Fire.key))
-                    inventory[itemIndex].Fire(InputType.UP);
-                if (Input.GetKeyDown(Controls.Fire.key))
-                    inventory[itemIndex].Fire(InputType.DOWN);
-                if (Input.GetKey(Controls.Fire.key))
-                    inventory[itemIndex].Fire(InputType.HOLD);
+        /// <summary> Handle item switching </summary>
+        private void CaptureItemSwitch() {
+            // TODO: Item wheel
+            for (int i = 0; i < inventory.Count && i < itemSlots.Length; i++)
+                if (Input.GetKeyDown(itemSlots[i].key))
+                    itemIndex = i;
+        }
 
+        /// <summary> Handles player fire input </summary>
+        private void CapturFire() {
+            if (Input.GetKeyUp(Controls.Fire.key))
+                inventory[itemIndex].Fire(InputType.UP);
+            if (Input.GetKeyDown(Controls.Fire.key))
+                inventory[itemIndex].Fire(InputType.DOWN);
+            if (Input.GetKey(Controls.Fire.key))
+                inventory[itemIndex].Fire(InputType.HOLD);
+        }
 
-                if (Input.GetKeyUp(Controls.Aim.key))
-                    inventory[itemIndex].Aim(InputType.UP);
-                if (Input.GetKeyDown(Controls.Aim.key))
-                    inventory[itemIndex].Aim(InputType.DOWN);
-                if (Input.GetKey(Controls.Aim.key))
-                    inventory[itemIndex].Aim(InputType.HOLD);
-            }
+        /// <summary> Handles player aim input </summary>
+        private void CaptureAim() {
+            if (Input.GetKeyUp(Controls.Aim.key))
+                inventory[itemIndex].Aim(InputType.UP);
+            if (Input.GetKeyDown(Controls.Aim.key))
+                inventory[itemIndex].Aim(InputType.DOWN);
+            if (Input.GetKey(Controls.Aim.key))
+                inventory[itemIndex].Aim(InputType.HOLD);
         }
     }
 }
