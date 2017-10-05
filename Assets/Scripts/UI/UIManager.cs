@@ -11,26 +11,18 @@ namespace UI {
         /// <summary>
         /// A list of all UI's within the scene.
         /// </summary>
-        public List<Canvas> canvases = new List<Canvas>();
-
-        /// <summary>
-        /// A list of UI with an interaction script.
-        /// </summary>
-        private List<GameUI> uis;
+        public List<GameUI> uis = new List<GameUI>();
 
         // Use this for initialization
         void Start() {
             bool foundActive = false;
             int active = 0;
-            uis = new List<GameUI>();
 
-            // Load Game UIs within the scene
-            foreach(Canvas canvas in canvases) {
-                GameUI ui = canvas.GetComponent<GameUI>();
-
+            // Load Game provided UIs
+            foreach(GameUI ui in uis) {
                 if(ui != null) {
                     ui.SetId();
-                    uis.Add(ui);
+                    ui.Manager = this;
 
                     if(ui.gameObject.activeInHierarchy)
                         foundActive = true;
@@ -92,8 +84,10 @@ namespace UI {
         /// <param name="active">The active flag</param>
         /// <param name="render">The render flag</param>
         public static void ActivateRender(GameUI ui, bool active, bool render) {
-            ui.Render = render;
-            ui.Active = active;
+            if(ui != null) {
+                ui.Render = render;
+                ui.Active = active;
+            }
         }
     }
 }

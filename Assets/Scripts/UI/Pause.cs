@@ -48,7 +48,7 @@ namespace UI {
 
             // UI Transitions
             if(Input.GetKeyUp(Controls.Pause.key))
-                manager.Transition(this, Player.ID, false);
+                Manager.Transition(this, Player.ID, false);
 
             if(Input.GetKeyUp(Controls.SelectionUp.key)) {
                 DeselectItem();
@@ -75,7 +75,7 @@ namespace UI {
         /// Helper method to transition to the Controls UI
         /// </summary>
         private void ToControls() {
-            manager.Transition(this, ControlsUI.ID, false);
+            Manager.Transition(this, ControlsUI.ID, false);
         }
 
         /// <summary>

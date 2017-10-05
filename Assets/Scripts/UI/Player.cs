@@ -29,7 +29,7 @@ namespace UI {
 
             // UI Transitions
             if(Input.GetKeyUp(Controls.Pause.key))
-                manager.Transition(this, Pause.ID, true);
+                Manager.Transition(this, Pause.ID, true);
         }
 
         /// <summary>

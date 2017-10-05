@@ -200,7 +200,7 @@ namespace UI {
         /// </summary>
         private void Exit() {
             if(!listen) {
-                manager.Transition(this, Pause.ID, false);
+                Manager.Transition(this, Pause.ID, false);
             }
         }
     }

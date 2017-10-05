@@ -11,9 +11,9 @@ namespace UI {
         /// Flag to activate the interaction script
         /// </summary>
         public bool Active {
-            get { return _active; }
+            get { return m_active; }
             set {
-                _active = value;
+                m_active = value;
                 Activate();
             }
         }
@@ -21,17 +21,20 @@ namespace UI {
         /// Flag to render the UI
         /// </summary>
         public bool Render {
-            get { return _render; }
+            get { return m_render; }
             set {
-                _render = value;
+                m_render = value;
                 Activate();
             }
         }
-
         /// <summary>
-        /// The object that holds the UI manager script
+        /// The UI manager this UI is tied
         /// </summary>
-        public Camera managerObj;
+        public UIManager Manager {
+            get { return m_manger; }
+            set { m_manger = value; }
+        }
+        
         /// <summary>
         /// The id for the UI
         /// </summary>
@@ -40,16 +43,18 @@ namespace UI {
         /// Flag to identify when the UI is transitioning
         /// </summary>
         protected bool transition;
-        /// <summary>
-        /// The UI manager pulled from managerObj
-        /// </summary>
-        protected UIManager manager;
 
-        private bool _active, _render;
+        /// <summary>
+        /// Internal UI manager
+        /// </summary>
+        private UIManager m_manger;
+        /// <summary>
+        /// Internal flags
+        /// </summary>
+        private bool m_active, m_render;
 
         protected void Start() {
             id = "";
-            manager = managerObj.GetComponent<UIManager>();    
         }
 
         /// <summary>
@@ -61,8 +66,8 @@ namespace UI {
         /// Helper method to activate the ui canvas when necessary.
         /// </summary>
         public void Activate() {
-            gameObject.SetActive(_active || _render);
-            transition = _active;
+            gameObject.SetActive(m_active || m_render);
+            transition = m_active;
         }
 
         public virtual void TransitionTo() { }

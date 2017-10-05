@@ -12,6 +12,10 @@ namespace Player {
         /// </summary>
         public GameObject player;
         /// <summary>
+        /// The player's UI during gameplay
+        /// </summary>
+        public GameUI playerUI;
+        /// <summary>
         /// Flags when the player should be able to control their camera.
         /// </summary>
         public bool playerCamControl = true;
@@ -24,14 +28,7 @@ namespace Player {
         /// Player sensitivity stats
         /// </summary>
         private PlayerStat stat;
-        /// <summary>
-        /// The UI Manager for the scene
-        /// </summary>
-        private UIManager manager;
-        /// <summary>
-        /// The player's UI during gameplay
-        /// </summary>
-        private GameUI playerUI;
+         
         /// <summary>
         /// The current yRot of the player's camera
         /// </summary>
@@ -48,8 +45,6 @@ namespace Player {
                     player = GameObject.FindGameObjectWithTag("Player");
             }
 
-            manager = GetComponent<UIManager>();
-            playerUI = manager.GetUI(UI.Player.ID);
             yRot = 0.0f;
 
             // Load Player Stats
@@ -63,8 +58,10 @@ namespace Player {
         // Update is called once per frame
         void Update() {
             // Stops Input calculations according
-            if(!playerCamControl || Cursor.lockState != CursorLockMode.Locked || !playerUI.Active)
-                 return;
+            if(!playerCamControl 
+                    || Cursor.lockState != CursorLockMode.Locked 
+                    || (playerUI != null && !playerUI.Active))
+                return;
                 
             // Record Inputs
             Vector2 mouseRot = new Vector2(Input.GetAxis("Mouse X"), -Input.GetAxis("Mouse Y"));

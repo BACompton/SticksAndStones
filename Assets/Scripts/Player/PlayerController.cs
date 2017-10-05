@@ -9,18 +9,9 @@ namespace Player {
     /// </summary>
     public class PlayerController : MonoBehaviour {
         /// <summary>
-        /// The object that holds the UI manager script
-        /// </summary>
-        public Camera managerObj;
-
-        /// <summary>
-        /// The UI manager pulled from managerObj
-        /// </summary>
-        private UIManager manager;
-        /// <summary>
         /// The player's UI during gameplay
         /// </summary>
-        private GameUI playerUI;
+        public GameUI playerUI;
 
         /// <summary>
         /// Player controller used to handle player movement
@@ -40,13 +31,10 @@ namespace Player {
             controller = GetComponent<CharacterController>();
             stat = GetComponent<PlayerStat>();
             moveDirection = Vector3.zero;
-
-            manager = managerObj.GetComponent<UIManager>();
-            playerUI = manager.GetUI(UI.Player.ID);
         }
 
         void Update() {
-            if(!playerUI.Active) {
+            if(playerUI != null && !playerUI.Active) {
                 controller.Move(Vector3.zero);
                 return;
             }
