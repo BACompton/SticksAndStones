@@ -96,7 +96,7 @@ namespace Player {
         /// <summary> Aims projectiles </summary>
         public static KeyControl Aim = new KeyControl("", "Aim", KeyCode.Mouse1, true);
         /// <summary> Toggles the item selection wheel </summary>
-        public static KeyControl ItemWheel = new KeyControl("", "Item Wheel", KeyCode.Q, true);
+        //public static KeyControl ItemWheel = new KeyControl("", "Item Wheel", KeyCode.Q, true);
 
         /// <summary>/ Cancels a action or return to previous menu </summary>
         public static KeyControl Back = new KeyControl("Menu", "Back/Pause", KeyCode.Escape, true);
@@ -111,7 +111,7 @@ namespace Player {
         /// <summary> Selects item in slot 2 </summary>
         public static KeyControl ItemSlot2 = new KeyControl("Menu", "Item Slot 2", KeyCode.Alpha2, true);
         /// <summary>/ Selects item in slot 3 </summary>
-        public static KeyControl ItemSlot3 = new KeyControl("Menu", "Item Slot 3", KeyCode.Alpha3, true);
+        //public static KeyControl ItemSlot3 = new KeyControl("Menu", "Item Slot 3", KeyCode.Alpha3, true);
 
         /// <summary> Searches the registered controls for controls that contain the provided name. </summary>
         /// <param name="name">The name to search</param>

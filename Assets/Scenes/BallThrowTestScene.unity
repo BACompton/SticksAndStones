@@ -651,7 +651,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1990833831671566, guid: 0da06df44018d024bba42906c4ff8066, type: 2}
       propertyPath: m_TagString
-      value: Trigger
+      value: Heavy Trigger
       objectReference: {fileID: 0}
     - target: {fileID: 1803374199357554, guid: 0da06df44018d024bba42906c4ff8066, type: 2}
       propertyPath: m_TagString
