@@ -15,7 +15,7 @@ namespace Entity{
         /// <summary> Applys an objects gravity to an objects movement. </summary>
         /// <param name="move">The movement vector</param>
         /// <returns> The movement after gravity</returns>
-        public Vector3 applyGravity(Vector3 move) {
+        public Vector3 ApplyGravity(Vector3 move) {
             Vector3 g = ownGravity ? gravity : Physics.gravity;
             return move + (g * Time.deltaTime);
         }

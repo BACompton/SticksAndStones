@@ -8,6 +8,9 @@ TagManager:
   - UI Title
   - UI Option
   - UI Manager
+  - Trigger
+  - Heavy Trigger
+  - Projection
   layers:
   - Default
   - TransparentFX

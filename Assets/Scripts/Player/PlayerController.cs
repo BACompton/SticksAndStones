@@ -59,7 +59,7 @@ namespace Player {
                     moveDirection += stat.jumpSpeed;
             }
 
-            moveDirection = stat.applyGravity(moveDirection);
+            moveDirection = stat.ApplyGravity(moveDirection);
             controller.Move(moveDirection * Time.deltaTime);
         }
 

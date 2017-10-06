@@ -39,6 +39,7 @@ namespace Player {
         public override void Aim(InputType type) {
             if (type == InputType.HOLD && available && proj == null) {
                 proj = CreateBall(string.Format("{0} Projection", gameObject.name));
+                proj.gameObject.tag = "Projection";
 
                 Color c = proj.GetComponent<Renderer>().material.color;
                 c.a = projAlpha;
@@ -54,7 +55,7 @@ namespace Player {
                 if (proj != null)
                     Destroy(proj.gameObject);
 
-                Ball b = CreateBall(gameObject.name);
+                CreateBall(gameObject.name);
                 available = false;
             }
         }
