@@ -16,8 +16,7 @@ public class DoorScipt : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        anim.SetBool("Open", puzzout.AllActivated());
-        print(puzzout.AllActivated());
-
+        if(puzzout.AllActivated())
+            anim.SetBool("Open", true);
     }
 }

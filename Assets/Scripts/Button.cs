@@ -17,6 +17,8 @@ namespace Entity {
             };
         /// <summary> Flag to toggle button state </summary>
         public bool toggle = false;
+        /// <summary> Flag to specifiy an always active button once activated </summary>
+        public bool sustain = false;
         /// <summary>
         /// The amount of time before the button is depressed.
         /// </summary>
@@ -81,7 +83,7 @@ namespace Entity {
         }
 
         void OnTriggerExit(Collider other) {
-            if (!toggle)
+            if (!toggle && !sustain)
                 foreach (string tag in tags)
                     if (other.gameObject.tag == tag)
                         Unpress();
