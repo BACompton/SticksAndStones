@@ -15,10 +15,14 @@ namespace Entity {
                 "Player",
                 "Heavy Trigger"
             };
+        /// <summary> Flag to toggle button state </summary>
+        public bool toggle = false;
         /// <summary>
         /// The amount of time before the button is depressed.
         /// </summary>
         public float deactivateDelay = 0.0f;
+        /// <summary> The amount of time before the toggle can be flipped </summary>
+        public float toggleDelay = 1.0f;
         /// <summary> The player's UI during gameplay </summary>
         public GameUI ui;
 
@@ -28,6 +32,8 @@ namespace Entity {
         private PuzzleInput btnIn;
         /// <summary> The amount of time the button has been pressed with no trigger. </summary>
         private float pressed;
+        /// <summary> The amount of time the toggle has been flipped </summary>
+        private float toggleAlive;
         /// <summary> Flag for no active trigger </summary>
         private bool noTrigger;
 
@@ -37,6 +43,7 @@ namespace Entity {
             btnIn = GetComponent<PuzzleInput>();
             pressed = 0.0f;
             noTrigger = true;
+            toggleAlive = toggleDelay;
         }
 
         void Update() {
@@ -53,25 +60,48 @@ namespace Entity {
                 else
                     btnIn.active = false;
             }
+
+            if (toggle && toggleAlive < toggleDelay)
+                toggleAlive += Time.deltaTime;
         }
 
         private void OnTriggerStay(Collider other) {
             foreach (string tag in tags)
                 if (other.gameObject.tag == tag) {
-                    btnIn.active = true;
-                    anim.SetFloat(SPEED, 1.0f);
-                    noTrigger = false;
-                    anim.SetBool(PRESSED, btnIn.active);
+                    if (toggle) {
+                        if (toggleAlive >= toggleDelay) {
+                            if (noTrigger)
+                                Press();
+                            else
+                                Unpress();
+                        }
+                    } else
+                        Press();
                 }
         }
 
         void OnTriggerExit(Collider other) {
-            foreach (string tag in tags)
-                if (other.gameObject.tag == tag) {
-                    pressed = 0.0f;
-                    noTrigger = true;
-                    anim.SetBool(PRESSED, false);
-                }
+            if (!toggle)
+                foreach (string tag in tags)
+                    if (other.gameObject.tag == tag)
+                        Unpress();
+        }
+
+        /// <summary> Presses the button. </summary>
+        private void Press() {
+            toggleAlive = 0.0f;
+            btnIn.active = true;
+            anim.SetFloat(SPEED, 1.0f);
+            noTrigger = false;
+            anim.SetBool(PRESSED, btnIn.active);
+        }
+
+        /// <summary> Unpresses the button </summary>
+        private void Unpress() {
+            toggleAlive = 0.0f;
+            pressed = 0.0f;
+            noTrigger = true;
+            anim.SetBool(PRESSED, false);
         }
     }
 }
