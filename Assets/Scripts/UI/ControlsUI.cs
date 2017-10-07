@@ -7,11 +7,17 @@ using Player;
 namespace UI {
     /// <summary> Controls UI Interaction script </summary>
     public class ControlsUI : GameUI {
+        // -------------------------- Static Class Variables --------------------------
+
         /// <summary> Player UI ID used to identify a player UI script. </summary>
-        public static string ID = "Controls";
+        public static string ID { get { return "Controls"; } }
+
+        // -------------------------- Unity Script Variables --------------------------
 
         /// <summary> Place where all the controls should be loaded </summary>
         public GameObject controls;
+
+        // -------------------------- Class Variables --------------------------
 
         /// <summary> Paths to control UI resources. </summary>
         private const string SECT = "UI/KeySection", KEY = "UI/KeyControl";
@@ -24,6 +30,8 @@ namespace UI {
         private GameObject src, reset;
         /// <summary> The key pressed during rebinding listening phase </summary>
         private KeyControl key;
+
+        // -------------------------- Unity Script Functions --------------------------
 
         // Use this for initialization
         new void Start() {
@@ -106,6 +114,8 @@ namespace UI {
             key = null;
         }
 
+        // -------------------------- UI Helper Functions --------------------------
+
         /// <summary> Reloads the Control UI menu. </summary>
         public void LoadControls() {
             GameObject sectPre = (GameObject)Resources.Load(SECT), keyPre = (GameObject)Resources.Load(KEY);
@@ -144,8 +154,7 @@ namespace UI {
             }
         }
 
-        /// <summary> Sets the id for the UI canvas </summary>
-        public override void SetId() { id = ID; }
+        
 
         /// <summary> Helper to toggle the listening functionality of the UI on </summary>
         /// <param name="src">The input button pressed</param>
@@ -212,11 +221,18 @@ namespace UI {
             return keySect.Find("Btns").Find("Reset").gameObject;
         }
 
+        // -------------------------- Transition Helpers --------------------------
+
         /// <summary> Helper transition to Exit UI </summary>
         private void Exit() {
             if(!listen) {
                 Manager.Transition(this, Pause.ID, false);
             }
         }
+
+        // -------------------------- GameUI Helpers --------------------------
+
+        /// <summary> Sets the id for the UI canvas </summary>
+        public override void SetId() { id = ID; }
     }
 }

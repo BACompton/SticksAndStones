@@ -5,6 +5,8 @@ using UnityEngine;
 namespace UI {
     /// <summary> Generic Game UI interaction script. </summary>
     public class GameUI : MonoBehaviour {
+        // -------------------------- Class Properties --------------------------
+
         /// <summary> Flag to activate the interaction script </summary>
         public bool Active {
             get { return m_active; }
@@ -26,7 +28,9 @@ namespace UI {
             get { return m_manger; }
             set { m_manger = value; }
         }
-        
+
+        // -------------------------- Class Variables --------------------------
+
         /// <summary> The id for the UI </summary>
         protected string id;
         /// <summary> Flag to identify when the UI is transitioning </summary>
@@ -36,6 +40,8 @@ namespace UI {
         private UIManager m_manger;
         /// <summary> Internal flags </summary>
         private bool m_active, m_render;
+
+        // -------------------------- Class Functions --------------------------
 
         protected void Start() {
             id = "";

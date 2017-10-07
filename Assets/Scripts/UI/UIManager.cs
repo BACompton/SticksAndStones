@@ -5,9 +5,12 @@ using UnityEngine;
 namespace UI {
     /// <summary> A manager to handle all UI transitions within the same scene. </summary>
     public class UIManager : MonoBehaviour {
+        // -------------------------- Unity Script Variables --------------------------
 
         /// <summary> A list of all UI's within the scene. </summary>
         public List<GameUI> uis = new List<GameUI>();
+
+        // -------------------------- Unity Functions --------------------------
 
         // Use this for initialization
         void Start() {
@@ -42,6 +45,8 @@ namespace UI {
                 }
             }
         }
+
+        // -------------------------- Helpers --------------------------
 
         /// <summary> Transitions UI screens </summary>
         /// <param name="curr">The current ui screen</param>

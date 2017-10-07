@@ -4,6 +4,8 @@ using UI;
 namespace Player {
     /// <summary> Translates players input into player rotation and camera rotation. </summary>
     public class PlayerCamera : MonoBehaviour {
+        // -------------------------- Unity Script Variabls --------------------------
+
         /// <summary> The gameobject the player controls </summary>
         public GameObject player;
         /// <summary> The player's UI during gameplay </summary>
@@ -13,11 +15,14 @@ namespace Player {
         /// <summary>/ Y rotation limits </summary>
         public float yMin = -80.0f, yMax = 80.0f;
 
+        // -------------------------- Class Variables --------------------------
+
         /// <summary> Player sensitivity stats </summary>
         private PlayerStat stat;
-         
         /// <summary> The current yRot of the player's camera </summary>
         private float yRot;
+
+        // -------------------------- Unity Functions --------------------------
 
         void Start() {
             // Try to loacte the player

@@ -7,8 +7,12 @@ using Player;
 namespace UI {
     /// <summary> Player UI Interaction script </summary>
     public class Player : GameUI {
+        // -------------------------- Static Class Variables --------------------------
+
         /// <summary> Player UI ID used to identify a player UI script. </summary>
-        public static string ID = "Player";
+        public static string ID { get { return "Player"; } }
+
+        // -------------------------- Unity Script Variables --------------------------
 
         /// <summary> The UI element that holds all the item sprites </summary>
         public Transform itemContainer;
@@ -17,9 +21,13 @@ namespace UI {
         /// <summary> The lifetime indicator for the current item </summary>
         public Slider slider;
 
+        // -------------------------- Class Variables --------------------------
+
         /// <summary> Details the current item being show on the UI </summary>
         private int activeIndex;
-        
+
+        // -------------------------- Unity Functions --------------------------
+
         // Use this for initialization
         new void Start() {
             base.Start();
@@ -70,8 +78,12 @@ namespace UI {
             }
         }
 
+        // -------------------------- GameUI Functions --------------------------
+
         /// <summary> Sets the id for the UI canvas </summary>
         public override void SetId() { id = ID; }
+
+        // -------------------------- Item Display Helpers --------------------------
 
         /// <summary> Helper method so show an item's sprite in the ui. </summary>
         /// <param name="index"> The index to show</param>

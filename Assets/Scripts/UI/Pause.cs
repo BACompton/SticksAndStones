@@ -7,13 +7,19 @@ using Player;
 namespace UI {
     /// <summary> Pause UI Interaction script </summary>
     public class Pause : GameUI {
+        // -------------------------- Static Class Variables --------------------------
+
         /// <summary> Pause UI ID used to identify a pause UI script. </summary>
-        public static string ID = "Pause";
+        public static string ID { get { return "Pause"; } }
+
+        // -------------------------- Class Variables --------------------------
 
         /// <summary> A reference to the parent where all the options are held. </summary>
         private Transform options;
         /// <summary> The current index of the selected item. </summary>
         private int index;
+
+        // -------------------------- Unity Functions --------------------------
 
         // Use this for initialization
         new void Start() {
@@ -58,8 +64,12 @@ namespace UI {
                 options.GetChild(index).gameObject.GetComponent<Button>().onClick.Invoke();
         }
 
+        // -------------------------- GameUI Functions --------------------------
+
         /// <summary> Sets the id for the UI canvas </summary>
         public override void SetId() { id = ID; }
+
+        // -------------------------- Transitions Helpers --------------------------
 
         /// <summary> Helper method to transition to the Controls UI </summary>
         private void ToControls() {
@@ -70,6 +80,8 @@ namespace UI {
         private void ToQuit() {
             Application.Quit();
         }
+
+        // -------------------------- Selections Switching Helpers --------------------------
 
         /// <summary> Identifies the selected menu item. </summary>
         private void SelectItem() {

@@ -406,7 +406,7 @@ MonoBehaviour:
   respawnDelay: 4
   alive: 0
   pickupDelay: 0.5
-  throwForce: {x: 0, y: 250, z: 500}
+  throwForce: {x: 0, y: 150, z: 500}
   projAlpha: 0.5
   bounciness: 0.9
   baseObj: {fileID: 1531134429607236}
@@ -459,7 +459,7 @@ MonoBehaviour:
   respawnDelay: 4
   alive: 0
   pickupDelay: 0.5
-  throwForce: {x: 0, y: 250, z: 500}
+  throwForce: {x: 0, y: 150, z: 600}
   projAlpha: 0.5
   bounciness: 0
   baseObj: {fileID: 1531134429607236}

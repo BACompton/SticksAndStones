@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 
 namespace Player {
-    /// <summary> Identifies the type of input. </summary>
+    /// <summary> Identifies the type of input was on an item. </summary>
     public enum InputType { HOLD, DOWN, UP }
 
     /// <summary> Interface for an player item. </summary>
     public class Item : MonoBehaviour {
+        // -------------------------- Unity Script Variables --------------------------
+
         /// <summary> Details if the item is avilable for use </summary>
         public bool available = true;
         /// <summary> Details if the item is disabled </summary>
@@ -14,6 +16,8 @@ namespace Player {
         public float respawnDelay = 15.0f;
         /// <summary> The amount of time the ball have been alive </summary>
         public float alive = 0.0f;
+
+        // -------------------------- Player Item Behavior Funstions --------------------------
 
         /// <summary> Method used when the player presses the fire key </summary>
         public virtual void Fire(InputType type) { }

@@ -6,6 +6,8 @@ using Entity;
 
 namespace Player {
     public class Ball : Item {
+        // -------------------------- Unity Script Variables --------------------------
+
         /// <summary> The amount of thime before the player can pick up the item again. </summary>
         public float pickupDelay = 0.5f;
         /// <summary> The force the player throws the ball </summary>
@@ -19,9 +21,11 @@ namespace Player {
         /// <summary> The player's UI during gameplay </summary>
         public GameUI ui;
 
+        // -------------------------- Class Variables --------------------------
+
         /// <summary> The rigid body that all physics is applied to </summary>
         private Rigidbody rigid;
-
+        /// <summary> The stats for a ball gravity. </summary>
         private EntityStat stat;
         /// <summary> The ball who spawned this ball instance </summary>
         private Ball source;
@@ -31,6 +35,8 @@ namespace Player {
         private bool paused;
         /// <summary> Saves ball body motion when paused </summary>
         private Vector3 saveVel, saveAngVel;
+
+        // -------------------------- Player's Held Ball Functions --------------------------
 
         public Ball() {
             proj = null;
@@ -59,6 +65,21 @@ namespace Player {
                 available = false;
             }
         }
+
+        /// <summary> Helper Method to spawn a Ball in the scene. </summary>
+        private Ball CreateBall(string name) {
+            alive = 0.0f;
+
+            Ball b = Instantiate(this, transform.position, baseObj.transform.rotation);
+            b.gameObject.SetActive(true);
+            b.source = this;
+            b.gameObject.name = name;
+            return b;
+        }
+
+        // -------------------------- Player Created Ball Functions --------------------------
+        // Note: 'source != null' is the proper check to determine if the ball was created
+
 
         // Use this for initialization
         void Start() {
@@ -133,19 +154,6 @@ namespace Player {
                 else 
                     source.available = true;
             }
-        }
-
-        /// <summary>
-        /// Helper Method to spawn a Ball in the scene.
-        /// </summary>
-        private Ball CreateBall(string name) {
-            alive = 0.0f;
-
-            Ball b = Instantiate(this, transform.position, baseObj.transform.rotation);
-            b.gameObject.SetActive(true);
-            b.source = this;
-            b.gameObject.name = name;
-            return b;
         }
     }
 }

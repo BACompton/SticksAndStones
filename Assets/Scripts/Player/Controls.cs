@@ -5,6 +5,8 @@ using UnityEngine;
 namespace Player {
     /// <summary> Player Control Specification. Details the keyCode plus extra details about its game use. </summary>
     public class KeyControl : IEquatable<KeyControl>, IComparable<KeyControl> {
+        // -------------------------- Class Properties --------------------------
+
         /// <summary> Details the category of the player control. </summary>
         public string Section {
             get { return _sect; }
@@ -32,6 +34,9 @@ namespace Player {
         public KeyCode Def {
             get { return _def; }
         }
+
+        // -------------------------- Class Variables --------------------------
+
         /// <summary> Details the use of the input. </summary>
         public string name;
         /// <summary> Details the current key for the input./ </summary>
@@ -43,6 +48,8 @@ namespace Player {
         private KeyCode _def;
         /// <summary> Internal flag to identify inputs added to Controls.contolSects </summary>
         private bool _added;
+
+        // -------------------------- Constructors --------------------------
 
         /// <summary> </summary>
         /// <param name="name">The named use for the control</param>
@@ -61,6 +68,8 @@ namespace Player {
             this.name = name;
             _def = key;
         }
+
+        // -------------------------- Class Functions --------------------------
 
         /// <summary> Determines if the current KeyCode is the default KeyCode </summary>
         /// <returns>True if the current KeyCode is the same as the default KeyCode; Othwewise false.</returns>
@@ -91,12 +100,22 @@ namespace Player {
         /// <summary> A container for registed controls sperated by sections. </summary>
         public static Dictionary<string, List<KeyControl>> controlSects = new Dictionary<string, List<KeyControl>>();
 
+        // -------------------------- Gameplay Controls --------------------------
+
         /// <summary> Fires projectiles/ </summary>
         public static KeyControl Fire = new KeyControl("", "Fire", KeyCode.Mouse0, true);
         /// <summary> Aims projectiles </summary>
         public static KeyControl Aim = new KeyControl("", "Aim", KeyCode.Mouse1, true);
         /// <summary> Toggles the item selection wheel </summary>
-        //public static KeyControl ItemWheel = new KeyControl("", "Item Wheel", KeyCode.Q, true);
+        public static KeyControl ItemWheel = new KeyControl("", "Item Wheel", KeyCode.Q, true);
+         /// <summary> Selects item in slot 1 </summary>
+        public static KeyControl ItemSlot1 = new KeyControl("", "Item Slot 1", KeyCode.Alpha1, true);
+        /// <summary> Selects item in slot 2 </summary>
+        public static KeyControl ItemSlot2 = new KeyControl("", "Item Slot 2", KeyCode.Alpha2, true);
+        /// <summary>/ Selects item in slot 3 </summary>
+        public static KeyControl ItemSlot3 = new KeyControl("", "Item Slot 3", KeyCode.Alpha3, true);
+        
+        // -------------------------- Menu Controls --------------------------
 
         /// <summary>/ Cancels a action or return to previous menu </summary>
         public static KeyControl Back = new KeyControl("Menu", "Back/Pause", KeyCode.Escape, true);
@@ -106,12 +125,8 @@ namespace Player {
         public static KeyControl SelectionUp = new KeyControl("Menu", "Selection Up", KeyCode.UpArrow, true);
         /// <summary> Moves selection down one item </summary>
         public static KeyControl SelectionDown = new KeyControl("Menu", "Selection Down", KeyCode.DownArrow, true);
-        /// <summary> Selects item in slot 1 </summary>
-        public static KeyControl ItemSlot1 = new KeyControl("Menu", "Item Slot 1", KeyCode.Alpha1, true);
-        /// <summary> Selects item in slot 2 </summary>
-        public static KeyControl ItemSlot2 = new KeyControl("Menu", "Item Slot 2", KeyCode.Alpha2, true);
-        /// <summary>/ Selects item in slot 3 </summary>
-        //public static KeyControl ItemSlot3 = new KeyControl("Menu", "Item Slot 3", KeyCode.Alpha3, true);
+
+        // -------------------------- Static Helpers --------------------------
 
         /// <summary> Searches the registered controls for controls that contain the provided name. </summary>
         /// <param name="name">The name to search</param>

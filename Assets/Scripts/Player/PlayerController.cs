@@ -6,8 +6,15 @@ using UI;
 namespace Player {
     /// <summary> Translates players input into player character actions. </summary>
     public class PlayerController : MonoBehaviour {
-        public static KeyControl[] itemSlots = Controls.FindMatching("Item Slot");
-        
+        // -------------------------- Static Class Variables --------------------------
+
+        /// <summary> Details all item slots avaliable to the player. </summary>
+        public static KeyControl[] ItemSlots { get { return _itemSlots; } }
+        /// <summary> Internal holder for ItemSlots </summary>
+        private static KeyControl[] _itemSlots = Controls.FindMatching("Item Slot");
+
+        // -------------------------- Unity Script Variables --------------------------
+
         /// <summary> The player's UI during gameplay </summary>
         public GameUI playerUI;
         /// <summary> The player's inventory </summary>
@@ -15,12 +22,16 @@ namespace Player {
         /// <summary> Identifies currently held item. </summary>
         public int itemIndex = 0;
 
+        // -------------------------- Class Variables --------------------------
+
         /// <summary> Player controller used to handle player movement </summary>
         private CharacterController controller;
         /// <summary> The current movement direction of the player </summary>
         private Vector3 moveDirection;
         /// <summary> The movemnt setting for the player </summary>
         private PlayerStat stat;
+
+        // -------------------------- Unity Functions --------------------------
 
         private void Start() {
             controller = GetComponent<CharacterController>();
@@ -47,6 +58,8 @@ namespace Player {
             }
         }
 
+        // -------------------------- Player Input Functions --------------------------
+
         /// <summary> Handle Player Movement </summary>
         private void CaptureMove() {
             if (controller.isGrounded) {
@@ -66,8 +79,8 @@ namespace Player {
         /// <summary> Handle item switching </summary>
         private void CaptureItemSwitch() {
             // TODO: Item wheel
-            for (int i = 0; i < inventory.Count && i < itemSlots.Length; i++)
-                if (Input.GetKeyDown(itemSlots[i].key))
+            for (int i = 0; i < inventory.Count && i < ItemSlots.Length; i++)
+                if (Input.GetKeyDown(ItemSlots[i].key))
                     itemIndex = i;
         }
 
