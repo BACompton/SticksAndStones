@@ -6,17 +6,17 @@ using Puzzle;
 public class DoorScipt : MonoBehaviour {
 
     private Animator anim;
-    private PuzzleOutput puzzout;
+    private PuzzleDevice puzzout;
 
 	// Use this for initialization
 	void Start () {
         anim = GetComponent<Animator>();
-        puzzout = GetComponent<PuzzleOutput>();
+        puzzout = GetComponent<PuzzleDevice>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if(puzzout.AllActivated())
+        if(puzzout.transmit)
             anim.SetBool("Open", true);
     }
 }

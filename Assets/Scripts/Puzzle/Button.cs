@@ -23,9 +23,7 @@ namespace Puzzle {
         public bool toggle = false;
         /// <summary> Flag to specifiy an always active button once activated </summary>
         public bool sustain = false;
-        /// <summary>
-        /// The amount of time before the button is depressed.
-        /// </summary>
+        /// <summary> The amount of time before the button is depressed. </summary>
         public float deactivateDelay = 0.0f;
         /// <summary> The amount of time before the toggle can be flipped </summary>
         public float toggleDelay = 1.0f;
@@ -37,7 +35,7 @@ namespace Puzzle {
         /// <summary> The animatior for the button. </summary>
         private Animator anim;
         /// <summary> The button's input component. </summary>
-        private PuzzleInput btnIn;
+        private PuzzleDevice btnIn;
         /// <summary> The amount of time the button has been pressed with no trigger. </summary>
         private float pressed;
         /// <summary> The amount of time the toggle has been flipped </summary>
@@ -50,7 +48,7 @@ namespace Puzzle {
         // Use this for initialization
         void Start() {
             anim = GetComponent<Animator>();
-            btnIn = GetComponent<PuzzleInput>();
+            btnIn = GetComponent<PuzzleDevice>();
             pressed = 0.0f;
             noTrigger = true;
             toggleAlive = toggleDelay;
@@ -65,8 +63,10 @@ namespace Puzzle {
             if (noTrigger) {
                 if (pressed < deactivateDelay)
                     pressed += Time.deltaTime;
-                else
+                else {
                     btnIn.active = false;
+                    btnIn.update = true;
+                }
             }
 
             if (toggle && toggleAlive < toggleDelay)
@@ -101,6 +101,7 @@ namespace Puzzle {
         private void Press() {
             toggleAlive = 0.0f;
             btnIn.active = true;
+            btnIn.update = true;
             anim.SetFloat(SPEED, 1.0f);
             noTrigger = false;
             anim.SetBool(PRESSED, btnIn.active);

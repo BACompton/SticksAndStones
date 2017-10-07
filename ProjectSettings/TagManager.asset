@@ -11,6 +11,7 @@ TagManager:
   - Trigger
   - Heavy Trigger
   - Projection
+  - Item Remover
   layers:
   - Default
   - TransparentFX
