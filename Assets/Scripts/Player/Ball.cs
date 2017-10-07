@@ -7,7 +7,11 @@ using Entity;
 namespace Player {
     public class Ball : Item {
         // -------------------------- Unity Script Variables --------------------------
-
+        
+        /// <summary> A list of all tags that can trigger item pickup </summary>
+        public List<string> pickUpTags = new List<string>() { "Player" };
+        /// <summary> A list of all tags that can trigger item removal </summary>
+        public List<string> removeTags = new List<string>() { "Item Remover" };
         /// <summary> The amount of thime before the player can pick up the item again. </summary>
         public float pickupDelay = 0.5f;
         /// <summary> The force the player throws the ball </summary>
@@ -142,8 +146,11 @@ namespace Player {
         }
 
         void OnTriggerEnter(Collider coll) {
-            if (pickupDelay <= source.alive && coll.gameObject.tag == "Player")
-                Destroy(this.gameObject);
+            if (source != null) {
+                if (removeTags.Contains(coll.gameObject.tag) 
+                     || (pickupDelay <= source.alive && pickUpTags.Contains(coll.gameObject.tag)))
+                    Destroy(this.gameObject);
+            }
         }
 
         void OnDestroy() {
