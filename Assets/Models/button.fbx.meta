@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 51ae15ed78eb60a4db961f04e3dabb8c
-timeCreated: 1507246133
+guid: ed2372de25192d941ab4ec68ae404ad6
+timeCreated: 1507376629
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -14,10 +14,11 @@ ModelImporter:
     400004: Btn
     400006: //RootNode
     4300000: Cube
-    7400000: Cube|Untitled
-    7400002: Armature|Depress
-    7400004: Armature|Press
-    7400006: Armature|Untitled
+    7400000: Cube|Depress
+    7400002: Cube|Untitled
+    7400004: Armature|Depress
+    7400006: Armature|Press
+    7400008: Armature|Untitled
     9500000: //RootNode
     13700000: //RootNode
   materials:

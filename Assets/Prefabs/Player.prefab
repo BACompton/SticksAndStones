@@ -405,6 +405,10 @@ MonoBehaviour:
   disabled: 0
   respawnDelay: 4
   alive: 0
+  pickUpTags:
+  - Player
+  removeTags:
+  - Item Remover
   pickupDelay: 0.5
   throwForce: {x: 0, y: 150, z: 500}
   projAlpha: 0.5
@@ -458,6 +462,10 @@ MonoBehaviour:
   disabled: 0
   respawnDelay: 4
   alive: 0
+  pickUpTags:
+  - Player
+  removeTags:
+  - Item Remover
   pickupDelay: 0.5
   throwForce: {x: 0, y: 150, z: 600}
   projAlpha: 0.5
@@ -491,10 +499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffebde12e0d5a6c40a640d48c389e9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uis:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  uis: []
 --- !u!114 &114978588385886812
 MonoBehaviour:
   m_ObjectHideFlags: 1

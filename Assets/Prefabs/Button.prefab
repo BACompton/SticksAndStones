@@ -126,7 +126,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1480128552993490}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.05, z: 0}
+  m_LocalPosition: {x: 0, y: 0.009764634, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4677971371340744}
@@ -155,7 +155,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 2, y: 0.2, z: 2}
-  m_Center: {x: 0, y: 0.05, z: 0}
+  m_Center: {x: 0, y: 0.09, z: 0}
 --- !u!95 &95536505479330392
 Animator:
   serializedVersion: 3
@@ -164,7 +164,7 @@ Animator:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1335574821124684}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 51ae15ed78eb60a4db961f04e3dabb8c, type: 3}
+  m_Avatar: {fileID: 9000000, guid: ed2372de25192d941ab4ec68ae404ad6, type: 3}
   m_Controller: {fileID: 9100000, guid: 24f319f3a46f6f444a20c5a424e29212, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
@@ -200,6 +200,7 @@ MonoBehaviour:
   - Player
   - Heavy Trigger
   toggle: 0
+  sustain: 0
   deactivateDelay: 0
   toggleDelay: 1
   ui: {fileID: 0}
@@ -240,7 +241,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300000, guid: 51ae15ed78eb60a4db961f04e3dabb8c, type: 3}
+  m_Mesh: {fileID: 4300000, guid: ed2372de25192d941ab4ec68ae404ad6, type: 3}
   m_Bones:
   - {fileID: 4677971371340744}
   - {fileID: 4917646386397390}

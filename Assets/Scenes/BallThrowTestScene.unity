@@ -562,6 +562,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114870527396375342, guid: 0da06df44018d024bba42906c4ff8066,
+        type: 2}
+      propertyPath: uis.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 114367465630328934, guid: 0da06df44018d024bba42906c4ff8066,
         type: 2}
       propertyPath: inventory.Array.size
@@ -657,6 +662,12 @@ Prefab:
       propertyPath: m_TagString
       value: Trigger
       objectReference: {fileID: 0}
+    - target: {fileID: 135867219604508364, guid: 0da06df44018d024bba42906c4ff8066,
+        type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: c5e985b4440dd2b48887c9824d832cf1,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0da06df44018d024bba42906c4ff8066, type: 2}
   m_IsPrefabParent: 0
@@ -704,11 +715,6 @@ Prefab:
       propertyPath: ui
       value: 
       objectReference: {fileID: 1206102063}
-    - target: {fileID: 114845362135616050, guid: 8d4a51751047be445ba503425c8ba204,
-        type: 2}
-      propertyPath: deactivateDelay
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d4a51751047be445ba503425c8ba204, type: 2}
   m_IsPrefabParent: 0
