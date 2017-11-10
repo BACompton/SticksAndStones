@@ -49,7 +49,7 @@ namespace Puzzle {
         void Start() {
             anim = GetComponent<Animator>();
             btnIn = GetComponent<PuzzleDevice>();
-            pressed = 0.0f;
+            pressed = deactivateDelay;
             noTrigger = true;
             toggleAlive = toggleDelay;
         }
@@ -63,7 +63,7 @@ namespace Puzzle {
             if (noTrigger) {
                 if (pressed < deactivateDelay)
                     pressed += Time.deltaTime;
-                else {
+                else if(btnIn.active) {
                     btnIn.active = false;
                     btnIn.update = true;
                 }
