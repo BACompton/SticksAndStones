@@ -184,6 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 297999def1ade9948b5c78b452b29a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
+  transmit: 0
+  trasmitColor: {r: 1, g: 1, b: 1, a: 1}
+  update: 0
   inputs: []
   outputs: []
   mode: 0
