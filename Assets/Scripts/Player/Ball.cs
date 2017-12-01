@@ -14,10 +14,14 @@ namespace Player {
         public List<string> removeTags = new List<string>() { "Item Remover" };
         /// <summary> The amount of thime before the player can pick up the item again. </summary>
         public float pickupDelay = 0.5f;
+        /// <summary> The amount of thime before the ball can stick to a surface. </summary>
+        public float stickyDelay = 0.1f;
+        /// <summary> Flags the ball to stick to the first surface it touches. </summary>
+        public bool sticky = false;
         /// <summary> The force the player throws the ball </summary>
         public Vector3 throwForce = new Vector3(0, 250, 500);
         /// <summary> The alpha value of the projection </summary>
-        public float projAlpha = 0.5f;
+        public Material projMat;
         /// <summary> The characteric of the ball's bounce. </summary>
         public float bounciness = 0.0f;
         /// <summary> The object throwing the ball </summary>
@@ -51,9 +55,7 @@ namespace Player {
                 proj = CreateBall(string.Format("{0} Projection", gameObject.name));
                 proj.gameObject.tag = "Projection";
 
-                Color c = proj.GetComponent<Renderer>().material.color;
-                c.a = projAlpha;
-                proj.GetComponent<Renderer>().material.color = c;
+                proj.GetComponent<Renderer>().material = projMat;
             }
 
             if (type == InputType.UP && proj != null)
@@ -160,6 +162,17 @@ namespace Player {
                     source.proj = null;
                 else 
                     source.available = true;
+            }
+        }
+
+        private void OnCollisionEnter(Collision collision) {
+            if(stickyDelay <= source.alive && sticky && rigid.useGravity) {
+                stat.ownGravity = true;
+                
+                rigid.AddForce(-rigid.velocity, ForceMode.VelocityChange);
+                rigid.AddTorque(-rigid.angularVelocity, ForceMode.VelocityChange);
+                stat.gravity = Vector3.zero;
+                Debug.Log("stick");
             }
         }
     }
