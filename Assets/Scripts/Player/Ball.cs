@@ -53,7 +53,10 @@ namespace Player {
         public override void Aim(InputType type) {
             if (type == InputType.HOLD && available && proj == null) {
                 proj = CreateBall(string.Format("{0} Projection", gameObject.name));
-                proj.gameObject.tag = "Projection";
+                if (proj.gameObject.tag == "Heavy Trigger")
+                    proj.gameObject.tag = "Heavy Projection";
+                else
+                    proj.gameObject.tag = "Projection";
 
                 proj.GetComponent<Renderer>().material = projMat;
             }
@@ -172,7 +175,6 @@ namespace Player {
                 rigid.AddForce(-rigid.velocity, ForceMode.VelocityChange);
                 rigid.AddTorque(-rigid.angularVelocity, ForceMode.VelocityChange);
                 stat.gravity = Vector3.zero;
-                Debug.Log("stick");
             }
         }
     }
