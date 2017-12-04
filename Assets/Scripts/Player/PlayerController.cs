@@ -30,7 +30,8 @@ namespace Player {
         private Vector3 moveDirection;
         /// <summary> The movemnt setting for the player </summary>
         private PlayerStat stat;
-
+        /// <summary> The ground the player is standing on </summary>
+        private Rigidbody ground;
         // -------------------------- Unity Functions --------------------------
 
         private void Start() {
@@ -58,6 +59,15 @@ namespace Player {
             }
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            Vector3 tran = collision.gameObject.transform.position;
+            Rigidbody rigid = collision.gameObject.GetComponent<Rigidbody>();
+
+            if (rigid != null && tran.y <= gameObject.transform.position.y)
+                ground = rigid;
+        }
+
         // -------------------------- Player Input Functions --------------------------
 
         /// <summary> Handle Player Movement </summary>
@@ -67,6 +77,11 @@ namespace Player {
                 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection.Scale(stat.speed);
+                
+                if (ground != null)
+                {
+                    moveDirection += ground.velocity;
+                }
 
                 if (Input.GetButton("Jump"))
                     moveDirection += stat.jumpSpeed;
