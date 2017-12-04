@@ -59,10 +59,10 @@ namespace Player {
             }
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnControllerColliderHit(ControllerColliderHit hit)
         {
-            Vector3 tran = collision.gameObject.transform.position;
-            Rigidbody rigid = collision.gameObject.GetComponent<Rigidbody>();
+            Vector3 tran = hit.gameObject.transform.position;
+            Rigidbody rigid = hit.gameObject.GetComponent<Rigidbody>();
 
             if (rigid != null && tran.y <= gameObject.transform.position.y)
                 ground = rigid;
@@ -77,11 +77,10 @@ namespace Player {
                 moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection.Scale(stat.speed);
+
                 
                 if (ground != null)
-                {
                     moveDirection += ground.velocity;
-                }
 
                 if (Input.GetButton("Jump"))
                     moveDirection += stat.jumpSpeed;
