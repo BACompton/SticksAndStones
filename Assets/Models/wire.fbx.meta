@@ -1,15 +1,29 @@
 fileFormatVersion: 2
-guid: f00048776d0fdce41badb6599a42b1bd
-timeCreated: 1512155703
+guid: 57b2c60ca54d07f47a5092ddcbe63f95
+timeCreated: 1512354589
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: //RootNode
-    400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: Sphere
+    100000: Btm
+    100002: Btm 1
+    100004: BtmCtr
+    100006: Cylinder
+    100008: Top
+    100010: Top_end
+    100012: TopCtr
+    100014: //RootNode
+    400000: Btm
+    400002: Btm 1
+    400004: BtmCtr
+    400006: Cylinder
+    400008: Top
+    400010: Top_end
+    400012: TopCtr
+    400014: //RootNode
+    4300000: Cylinder
+    9500000: //RootNode
+    13700000: Cylinder
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -87,7 +101,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
