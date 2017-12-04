@@ -63,7 +63,7 @@ namespace Puzzle {
 
         /// <summary> Determines if the device is enabled according to its inputs and the devices behavior mode. </summary>
         /// <returns> True if the device is enabled; Otherwise false.</returns>
-        private bool IsEnabled() {
+        public bool IsEnabled() {
             switch (transmitMode) {
                 case DeviceBehavior.STATIC:
                     return true;
