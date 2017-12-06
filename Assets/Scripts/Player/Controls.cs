@@ -106,6 +106,8 @@ namespace Player {
         public static KeyControl Fire = new KeyControl("", "Fire", KeyCode.Mouse0, true);
         /// <summary> Aims projectiles </summary>
         public static KeyControl Aim = new KeyControl("", "Aim", KeyCode.Mouse1, true);
+        /// <summary> Interact with the enviroment </summary>
+        public static KeyControl Interact = new KeyControl("", "Interact", KeyCode.E, true);
         /// <summary> Toggles the item selection wheel </summary>
         public static KeyControl ItemWheel = new KeyControl("", "Item Wheel", KeyCode.Q, true);
          /// <summary> Selects item in slot 1 </summary>

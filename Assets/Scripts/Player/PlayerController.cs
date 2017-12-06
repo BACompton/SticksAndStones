@@ -32,6 +32,8 @@ namespace Player {
         private PlayerStat stat;
         /// <summary> The ground the player is standing on </summary>
         private Rigidbody ground;
+        private List<Interactable> interObjs;
+
         // -------------------------- Unity Functions --------------------------
 
         private void Start() {
@@ -39,12 +41,13 @@ namespace Player {
             stat = GetComponent<PlayerStat>();
             moveDirection = Vector3.zero;
 
+            interObjs = new List<Interactable>();
             itemIndex = 0;
             foreach (Item i in inventory)
                 i.alive = i.respawnDelay;
         }
 
-        void Update() {
+        private void Update() {
             if (playerUI != null && !playerUI.Active) {
                 controller.Move(Vector3.zero);
                 return;
@@ -57,6 +60,7 @@ namespace Player {
                 CapturFire();
                 CaptureAim();
             }
+            CaptureInteraction();
         }
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -66,6 +70,22 @@ namespace Player {
 
             if (rigid != null && tran.y <= gameObject.transform.position.y)
                 ground = rigid;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            Interactable obj = other.gameObject.GetComponent<Interactable>();
+
+            if (obj != null && !interObjs.Contains(obj))
+                interObjs.Add(obj);
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            Interactable obj = other.gameObject.GetComponent<Interactable>();
+
+            if (obj != null)
+                interObjs.Remove(obj);
         }
 
         // -------------------------- Player Input Functions --------------------------
@@ -116,6 +136,14 @@ namespace Player {
                 inventory[itemIndex].Aim(InputType.DOWN);
             if (Input.GetKey(Controls.Aim.key))
                 inventory[itemIndex].Aim(InputType.HOLD);
+        }
+
+        /// <summary> Handles player interaction input </summary>
+        private void CaptureInteraction()
+        {
+            if (Input.GetKeyDown(Controls.Interact.key))
+                foreach (Interactable i in interObjs)
+                    i.Interact();
         }
     }
 }
