@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Puzzle;
 
-public class DoorScipt : MonoBehaviour {
+public class WindowScript : MonoBehaviour {
 
     private Animator anim;
     private PuzzleDevice puzzout;
@@ -18,6 +18,8 @@ public class DoorScipt : MonoBehaviour {
 	void Update () {
         if (puzzout.transmit)
             anim.SetBool("Open", true);
+        else
+            anim.SetBool("Open", false);
 
     }
 }
