@@ -18,5 +18,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Proto.unity
     guid: fa928767a7e6a594f88acd1e57f5fe11
   - enabled: 1
+    path: Assets/Scenes/PlatformLevel01.unity
+    guid: cba5a1ae4cfedad4783d156b42a2f72d
+  - enabled: 1
+    path: Assets/Scenes/ColourTheoryLevel.unity
+    guid: 49eefc4418ef1dc4da33572e17011d99
+  - enabled: 0
     path: Assets/Scenes/BBLevel.unity
-    guid: 00000000000000000000000000000000
+    guid: 56c9bc7e6144f124abba94165e40d38a

@@ -569,11 +569,15 @@ MonoBehaviour:
   transmit: 0
   trasmitColor: {r: 1, g: 1, b: 1, a: 1}
   update: 0
+  force: 0
   inputs:
   - {fileID: 1104178360}
   outputs: []
   transmitMode: 2
   filterMode: 0
+  output: 0
+  target: {r: 1, g: 1, b: 1, a: 1}
+  tolerance: {x: 0.01, y: 0.01, z: 0.05}
 --- !u!95 &151318617
 Animator:
   serializedVersion: 3
@@ -1581,12 +1585,16 @@ MonoBehaviour:
   transmit: 0
   trasmitColor: {r: 1, g: 1, b: 1, a: 1}
   update: 0
+  force: 0
   inputs:
   - {fileID: 1522431841}
   - {fileID: 1911340289}
   outputs: []
   transmitMode: 2
   filterMode: 2
+  output: 0
+  target: {r: 1, g: 1, b: 1, a: 1}
+  tolerance: {x: 0.01, y: 0.01, z: 0.05}
 --- !u!82 &348640261
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2327,11 +2335,15 @@ MonoBehaviour:
   transmit: 0
   trasmitColor: {r: 1, g: 1, b: 1, a: 1}
   update: 0
+  force: 0
   inputs:
   - {fileID: 117583448}
   outputs: []
   transmitMode: 2
   filterMode: 2
+  output: 0
+  target: {r: 1, g: 1, b: 1, a: 1}
+  tolerance: {x: 0.01, y: 0.01, z: 0.05}
 --- !u!95 &582376911
 Animator:
   serializedVersion: 3
@@ -3259,12 +3271,17 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 321b0fce0fbd5134fa348b6f8080e36c, type: 2}
+      objectReference: {fileID: 2100000, guid: 152f34a6b9a89f84cac145d5df0d5e56, type: 2}
     - target: {fileID: 114794889468869492, guid: 8d4a51751047be445ba503425c8ba204,
         type: 2}
       propertyPath: outputs.Array.data[0]
       value: 
       objectReference: {fileID: 1020829140}
+    - target: {fileID: 114845362135616050, guid: 8d4a51751047be445ba503425c8ba204,
+        type: 2}
+      propertyPath: toggleDelay
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d4a51751047be445ba503425c8ba204, type: 2}
   m_IsPrefabParent: 0
@@ -4055,6 +4072,7 @@ MonoBehaviour:
   transmit: 0
   trasmitColor: {r: 1, g: 1, b: 1, a: 1}
   update: 0
+  force: 0
   inputs:
   - {fileID: 933062889}
   - {fileID: 1734282775}
@@ -4063,6 +4081,9 @@ MonoBehaviour:
   outputs: []
   transmitMode: 2
   filterMode: 2
+  output: 0
+  target: {r: 1, g: 1, b: 1, a: 1}
+  tolerance: {x: 0.01, y: 0.01, z: 0.05}
 --- !u!95 &1020829141
 Animator:
   serializedVersion: 3
@@ -5903,7 +5924,7 @@ Prefab:
     - target: {fileID: 224916442113237026, guid: c1673a66243545f4687ff99ec021a587,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000041723277
       objectReference: {fileID: 0}
     - target: {fileID: 224464509899301736, guid: c1673a66243545f4687ff99ec021a587,
         type: 2}
@@ -5923,7 +5944,7 @@ Prefab:
     - target: {fileID: 224464509899301736, guid: c1673a66243545f4687ff99ec021a587,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 224747576229778164, guid: c1673a66243545f4687ff99ec021a587,
         type: 2}
@@ -5933,7 +5954,7 @@ Prefab:
     - target: {fileID: 224747576229778164, guid: c1673a66243545f4687ff99ec021a587,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 100.00006
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c1673a66243545f4687ff99ec021a587, type: 2}
@@ -6130,6 +6151,7 @@ MonoBehaviour:
   transmit: 0
   trasmitColor: {r: 1, g: 1, b: 1, a: 1}
   update: 0
+  force: 0
   inputs:
   - {fileID: 1714746701}
   - {fileID: 1189105145}
@@ -6137,6 +6159,9 @@ MonoBehaviour:
   outputs: []
   transmitMode: 2
   filterMode: 2
+  output: 0
+  target: {r: 1, g: 1, b: 1, a: 1}
+  tolerance: {x: 0.01, y: 0.01, z: 0.05}
 --- !u!95 &1391702445
 Animator:
   serializedVersion: 3

@@ -44,8 +44,6 @@ namespace Puzzle
         private Animator anim;
         /// <summary> The lever's input component. </summary>
         private PuzzleDevice puzzleIn;
-        /// <summary> The amount of time the lever has been as a timer. </summary>
-        private float active;
         /// <summary> The animation speed before being paused. </summary>
         private float prevSpeed;
         /// <summary> Flag to start the timer once the lever is in the proper state. </summary>
@@ -63,7 +61,6 @@ namespace Puzzle
         {
             anim = GetComponent<Animator>();
             puzzleIn = GetComponent<PuzzleDevice>();
-            active = deactivateDelay;
             prevSpeed = -1.0f;
             activeState = state;
             startTimer = -1.0f;
@@ -91,9 +88,10 @@ namespace Puzzle
 
             if (numOfAnin == 0) {
                 activeState = state;
+                puzzleIn.update = true;
                 numOfAnin = -1;
             }
-            Debug.Log(activeState + " " + numOfAnin);
+            
             puzzleIn.active = stateActivate[activeState];
 
             if (startTimer > 0.0f)

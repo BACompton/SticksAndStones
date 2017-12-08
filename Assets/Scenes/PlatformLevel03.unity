@@ -2104,10 +2104,14 @@ MonoBehaviour:
   transmit: 0
   trasmitColor: {r: 1, g: 1, b: 1, a: 1}
   update: 0
+  force: 0
   inputs: []
   outputs: []
   transmitMode: 0
   filterMode: 0
+  output: 0
+  target: {r: 1, g: 1, b: 1, a: 1}
+  tolerance: {x: 0.01, y: 0.01, z: 0.05}
 --- !u!54 &1440310881
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2570,17 +2574,17 @@ Prefab:
     - target: {fileID: 224747576229778164, guid: c1673a66243545f4687ff99ec021a587,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 100.00006
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224916442113237026, guid: c1673a66243545f4687ff99ec021a587,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000041723277
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224464509899301736, guid: c1673a66243545f4687ff99ec021a587,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -50
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114576018983083332, guid: c1673a66243545f4687ff99ec021a587,
         type: 2}

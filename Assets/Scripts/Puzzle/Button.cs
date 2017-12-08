@@ -63,7 +63,7 @@ namespace Puzzle {
 
         void Update() {
             if (ui != null && !ui.Active) {
-                anim.SetFloat(SPEED, 0.0f);
+                anim.speed = 0.0f;
                 return;
             }
 
@@ -111,7 +111,7 @@ namespace Puzzle {
             toggleAlive = 0.0f;
             btnIn.active = true;
             btnIn.update = true;
-            anim.SetFloat(SPEED, 1.0f);
+            anim.speed = 1.0f;
             noTrigger = false;
             anim.SetBool(PRESSED, btnIn.active);
         }
@@ -122,7 +122,7 @@ namespace Puzzle {
 
             if (!toggle) {
                 pressed = 0.0f;
-                anim.SetFloat(SPEED, 1.0f / (1 + deactivateDelay));
+                anim.speed =  1.0f / (1 + deactivateDelay);
             } else
                 pressed = deactivateDelay;
             noTrigger = true;

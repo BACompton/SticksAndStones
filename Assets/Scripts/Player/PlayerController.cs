@@ -106,10 +106,10 @@ namespace Player {
                 moveDirection = transform.TransformDirection(moveDirection);
                 moveDirection.Scale(stat.speed);
 
-                
 				if (ground != null)
 					moveDirection += ground.velocity;
-				if (Input.GetButton ("Jump")) {
+
+                if (Input.GetButton ("Jump")) {
 					MusicSource.pitch = 1f;
 					MusicSource.volume = 1f;
 					moveDirection += stat.jumpSpeed;
@@ -120,6 +120,8 @@ namespace Player {
 					MusicSource.clip = stepClip;
 					MusicSource.Play (); // Step Sound
 				}
+            } else {
+                ground = null;
             }
 
             moveDirection = stat.ApplyGravity(moveDirection);
