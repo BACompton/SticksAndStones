@@ -23,8 +23,6 @@ public class FloatingPlatform : MonoBehaviour
         puzzout = GetComponent<PuzzleDevice>();
         rigid = GetComponent<Rigidbody>();
         wait = 0;
-
-        puzzout.active = false;
     }
 
     void Update() {
@@ -43,7 +41,6 @@ public class FloatingPlatform : MonoBehaviour
                 rigid.constraints = RigidbodyConstraints.FreezeAll;
                 wait += Time.deltaTime;
             }
-
         } else  // Freeze when not active
             rigid.constraints = RigidbodyConstraints.FreezeAll;
 
@@ -54,7 +51,6 @@ public class FloatingPlatform : MonoBehaviour
             rigid.velocity = Vector3.zero;
             wait = 0;
         }
-        
 
         puzzout.active = puzzout.IsEnabled();
     }

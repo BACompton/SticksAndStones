@@ -21,6 +21,9 @@ namespace Player {
         public List<Item> inventory;
         /// <summary> Identifies currently held item. </summary>
         public int itemIndex = 0;
+		public AudioClip jumpClip, stepClip, switchClip;
+		public float threshold = 2f;
+
 
         // -------------------------- Class Variables --------------------------
 
@@ -33,6 +36,7 @@ namespace Player {
         /// <summary> The ground the player is standing on </summary>
         private Rigidbody ground;
         private List<Interactable> interObjs;
+		private AudioSource MusicSource;
 
         // -------------------------- Unity Functions --------------------------
 
@@ -43,6 +47,10 @@ namespace Player {
 
             interObjs = new List<Interactable>();
             itemIndex = 0;
+
+			MusicSource = this.gameObject.gameObject.GetComponent<AudioSource>();
+
+
             foreach (Item i in inventory)
                 i.alive = i.respawnDelay;
         }
@@ -99,11 +107,19 @@ namespace Player {
                 moveDirection.Scale(stat.speed);
 
                 
-                if (ground != null)
-                    moveDirection += ground.velocity;
-
-                if (Input.GetButton("Jump"))
-                    moveDirection += stat.jumpSpeed;
+				if (ground != null)
+					moveDirection += ground.velocity;
+				if (Input.GetButton ("Jump")) {
+					MusicSource.pitch = 1f;
+					MusicSource.volume = 1f;
+					moveDirection += stat.jumpSpeed;
+					MusicSource.clip = jumpClip;
+					MusicSource.Play (); // Jump Sound
+				} else if(controller.velocity.magnitude > threshold && MusicSource.isPlaying == false) {
+					MusicSource.pitch = 0.8f;
+					MusicSource.clip = stepClip;
+					MusicSource.Play (); // Step Sound
+				}
             }
 
             moveDirection = stat.ApplyGravity(moveDirection);
@@ -113,9 +129,15 @@ namespace Player {
         /// <summary> Handle item switching </summary>
         private void CaptureItemSwitch() {
             // TODO: Item wheel
-            for (int i = 0; i < inventory.Count && i < ItemSlots.Length; i++)
-                if (Input.GetKeyDown(ItemSlots[i].key))
-                    itemIndex = i;
+			for (int i = 0; i < inventory.Count && i < ItemSlots.Length; i++)
+				if (Input.GetKeyDown (ItemSlots [i].key)) {
+					if(itemIndex != i){
+						MusicSource.pitch = 1f;
+						MusicSource.clip = switchClip;
+						MusicSource.Play ();
+					}
+					itemIndex = i;
+				}
         }
 
         /// <summary> Handles player fire input </summary>
