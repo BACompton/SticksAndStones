@@ -5,12 +5,16 @@ using UI;
 
 namespace Puzzle {
     public class Button : MonoBehaviour {
+		
+
         // -------------------------- Static Class Variables -------------------------- 
 
         /// <summary> The animation variable to set for pressed. </summary>
         private static string PRESSED { get { return "Pressed"; } }
         /// <summary> The animation variable to set animation speed. </summary>
         private static string SPEED { get { return "Speed"; } }
+
+
 
         // -------------------------- Unity Script Variables -------------------------- 
 
@@ -43,6 +47,8 @@ namespace Puzzle {
         /// <summary> Flag for no active trigger </summary>
         private bool noTrigger;
 
+		private AudioSource MusicSource;
+
         // -------------------------- Unity Functios --------------------------
 
         // Use this for initialization
@@ -52,6 +58,7 @@ namespace Puzzle {
             pressed = deactivateDelay;
             noTrigger = true;
             toggleAlive = toggleDelay;
+			MusicSource = GetComponent<AudioSource>();
         }
 
         void Update() {
@@ -99,6 +106,8 @@ namespace Puzzle {
 
         /// <summary> Presses the button. </summary>
         private void Press() {
+			if(!anim.GetBool(PRESSED))
+				MusicSource.Play ();
             toggleAlive = 0.0f;
             btnIn.active = true;
             btnIn.update = true;

@@ -19,12 +19,13 @@ namespace UI {
         /// <summary> The player's controlling script </summary>
         public PlayerController player;
         /// <summary> The lifetime indicator for the current item </summary>
-        public Slider slider;
+		public Slider slider;
 
         // -------------------------- Class Variables --------------------------
 
         /// <summary> Details the current item being show on the UI </summary>
         private int activeIndex;
+		private AudioSource MusicSource;
 
         // -------------------------- Unity Functions --------------------------
 
@@ -38,6 +39,7 @@ namespace UI {
             else
                 activeIndex = 0;
             ShowItem(activeIndex);
+			MusicSource = GetComponent<AudioSource>();
         }
 
         void OnEnable() {
@@ -53,8 +55,11 @@ namespace UI {
             Cursor.lockState = CursorLockMode.Locked;
 
             // UI Transitions
-            if (Input.GetKeyUp(Controls.Back.key))
-                Manager.Transition(this, Pause.ID, true);
+			if (Input.GetKeyUp (Controls.Back.key)) {
+				MusicSource.volume = 0.3f;
+				MusicSource.Play ();
+				Manager.Transition (this, Pause.ID, true);
+			}
 
             // Show current item
             if (player != null && itemContainer != null) {
