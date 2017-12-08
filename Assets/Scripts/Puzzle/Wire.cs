@@ -22,6 +22,7 @@ namespace Puzzle {
         private Color target, curr;
         /// <summary> The transition color </summary>
         private float r, g, b;
+        private bool force;
 
         // -------------------------- Unity Script Functions -------------------------- 
 
@@ -34,6 +35,7 @@ namespace Puzzle {
             mat.color = off;
             device.trasmitColor = off;
             target = off;
+            force = false;
         }
 
         // Update is called once per frame
@@ -59,8 +61,20 @@ namespace Puzzle {
 
                 mat.color = curr;
                 left += Time.deltaTime;
-            }  else
+
+                foreach (PuzzleDevice output in device.outputs)
+                    output.force = true;
+                force = true;
+            }
+            else {
                 mat.color = target;
+
+                if(force) {
+                    foreach (PuzzleDevice output in device.outputs)
+                        output.force = false;
+                    force = false;
+                }
+            }
             device.trasmitColor = mat.color;
         }
     }

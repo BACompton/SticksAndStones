@@ -104,7 +104,7 @@ namespace Player {
 
                 if (Input.GetButton("Jump"))
                     moveDirection += stat.jumpSpeed;
-            }
+            } else { ground = null; }
 
             moveDirection = stat.ApplyGravity(moveDirection);
             controller.Move(moveDirection * Time.deltaTime);

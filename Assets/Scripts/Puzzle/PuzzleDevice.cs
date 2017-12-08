@@ -17,7 +17,7 @@ namespace Puzzle {
         /// <summary> The color of the transmition </summary>
         public Color trasmitColor = new Color(1, 1, 1);
         /// <summary> Flags the device evaluate the inputs </summary>
-        public bool update = false;
+        public bool update = false, force = false;
         /// <summary> A list of all the device's inputs. </summary>
         public List<PuzzleDevice> inputs;
         /// <summary> A list of all the device's outputs. </summary>
@@ -26,6 +26,10 @@ namespace Puzzle {
         public DeviceBehavior transmitMode = DeviceBehavior.STATIC;
         /// <summary> Details how the device should translate input colors to output colors </summary>
         public DeviceBehavior filterMode = DeviceBehavior.STATIC;
+
+        public bool output = false;
+        public Color target = Color.white;
+        public Vector3 tolerance = new Vector3(.01f, .01f, .05f);
 
         private bool queueUpdate = false;
 
@@ -44,15 +48,25 @@ namespace Puzzle {
                 update = false;
             }
 
+            if (force)
+                update = true;
+
             if(update) {
                 bool prevXmit = transmit;
+                Color prevColor = trasmitColor;
                 transmit = IsEnabled() && active;
-
+                
                 if (transmit)
                     trasmitColor = FilterColor();
 
+                if (transmit && output)
+                    if (Mathf.Abs(target.r - trasmitColor.r) > tolerance.x
+                        || Mathf.Abs(target.g - trasmitColor.g) > tolerance.y
+                        || Mathf.Abs(target.b - trasmitColor.b) > tolerance.z)
+                        transmit = false;
+
                 // Signal outputs to update
-                if(prevXmit != transmit)
+                if(prevXmit != transmit || prevColor != trasmitColor)
                     foreach (PuzzleDevice device in outputs)
                         device.update = true;
                 queueUpdate = true;
@@ -101,18 +115,18 @@ namespace Puzzle {
                     c = new Color(1, 1, 1);
 
                     foreach (PuzzleDevice input in inputs)
-                        if (input.transmit) {
-                            c.r = ((int)(c.r * 255) & (int)(input.trasmitColor.r * 255)) / 255;
-                            c.g = ((int)(c.g * 255) & (int)(input.trasmitColor.g * 255)) / 255;
-                            c.b = ((int)(c.b * 255) & (int)(input.trasmitColor.b * 255)) / 255;
+                        if (input.transmit) {  
+                            c.r = ((int)(c.r * 255) & (int)(input.trasmitColor.r * 255)) / 255f;
+                            c.g = ((int)(c.g * 255) & (int)(input.trasmitColor.g * 255)) / 255f;
+                            c.b = ((int)(c.b * 255) & (int)(input.trasmitColor.b * 255)) / 255f;
                         }
                     break;
                 case DeviceBehavior.OR:
                     foreach (PuzzleDevice input in inputs)
                         if (input.transmit) {
-                            c.r = ((int)(c.r * 255) | (int)(input.trasmitColor.r * 255)) / 255;
-                            c.g = ((int)(c.g * 255) | (int)(input.trasmitColor.g * 255)) / 255;
-                            c.b = ((int)(c.b * 255) | (int)(input.trasmitColor.b * 255)) / 255;
+                            c.r = ((int)(c.r * 255) | (int)(input.trasmitColor.r * 255)) / 255f;
+                            c.g = ((int)(c.g * 255) | (int)(input.trasmitColor.g * 255)) / 255f;
+                            c.b = ((int)(c.b * 255) | (int)(input.trasmitColor.b * 255)) / 255f;
                         }
                     break;
             }

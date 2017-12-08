@@ -22,7 +22,6 @@ public class Teleport : MonoBehaviour {
         if (whitelist.Contains(other.gameObject.tag))
         {
             other.gameObject.transform.SetPositionAndRotation(dest, other.gameObject.transform.rotation);
-            Debug.Log("Why");
         }
     }
 }
