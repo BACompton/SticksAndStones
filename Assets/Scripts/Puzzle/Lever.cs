@@ -37,6 +37,7 @@ namespace Puzzle
         /// <summary> Details if the puzzle device should be active in a certain state. </summary>
         public bool[] stateActivate = { false, true, true };
 
+
         // -------------------------- Class Variables --------------------------
 
         /// <summary> The animatior for the lever. </summary>
@@ -49,6 +50,8 @@ namespace Puzzle
         private float prevSpeed;
         /// <summary> Flag to start the timer once the lever is in the proper state. </summary>
         private float startTimer, passedTime;
+		/// <summary> The source of the sound </summary>
+		private AudioSource MusicSource;
         
         /// <summary> Details how many animations needed to go through before updateing state. </summary>
         private int numOfAnin;
@@ -65,6 +68,7 @@ namespace Puzzle
             activeState = state;
             startTimer = -1.0f;
             numOfAnin = 0;
+			MusicSource = GetComponent<AudioSource>();
 
             anim.SetInteger(STATE, state % STATE_LENGTH);
             anim.speed = 10;
@@ -106,7 +110,7 @@ namespace Puzzle
         public override void Interact() {
             int diff = state;
             float spd = speed;
-
+			MusicSource.Play ();
             if (timer) {
                 startTimer = 1 / spd;
                 state = state == 0 ? STATE_LENGTH - 1 : 0;

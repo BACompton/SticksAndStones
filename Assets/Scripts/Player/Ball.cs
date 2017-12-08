@@ -29,6 +29,8 @@ namespace Player {
         /// <summary> The player's UI during gameplay </summary>
         public GameUI ui;
 
+		public AudioClip ballClip, hitClip;
+
         // -------------------------- Class Variables --------------------------
 
         /// <summary> The rigid body that all physics is applied to </summary>
@@ -43,6 +45,8 @@ namespace Player {
         private bool paused;
         /// <summary> Saves ball body motion when paused </summary>
         private Vector3 saveVel, saveAngVel;
+
+		private AudioSource MusicSource;
 
         // -------------------------- Player's Held Ball Functions --------------------------
 
@@ -96,7 +100,7 @@ namespace Player {
             saveVel = Vector3.zero;
             saveAngVel = Vector3.zero;
             stat = GetComponent<EntityStat>();
-
+			MusicSource = GetComponent<AudioSource>();
             if(GetComponent<Collider>() != null)
                 GetComponent<Collider>().material.bounciness = bounciness;
 
@@ -105,6 +109,9 @@ namespace Player {
                 rigid.AddForce(transform.TransformDirection(throwForce));
             } else
                 alive = respawnDelay;
+			MusicSource.volume = 1f;
+			MusicSource.clip = ballClip;
+			MusicSource.Play();
         }
 
         // Update is called once per frame
@@ -169,6 +176,10 @@ namespace Player {
         }
 
         private void OnCollisionEnter(Collision collision) {
+			MusicSource.volume /= 1.5f;
+			MusicSource.clip = hitClip;
+			MusicSource.Play();
+
             if(stickyDelay <= source.alive && sticky && rigid.useGravity) {
                 stat.ownGravity = true;
                 
